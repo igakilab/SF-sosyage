@@ -9,29 +9,21 @@
     <script type="text/javascript" src="js/jquery.serialize.js"></script>
     <script type="text/javascript" src="dwr/interface/MultiplePrinter.js"></script>
     <script type="text/javascript">
-      function update(){
-        var formData = $('#csprinter_form').serializeJson();
-        MultiplePrinter.execute(formData, {
-          callback: function(data) {
-            $('#csprinterReply').text(data);
-            $('#error_message').text("");
-          },
-          errorHandler: updateErrorMessage
-        });
-      }
-      function updateErrorMessage(message, exception){
-        $('#error_message').text(message);
-        $('#csprinterReply').text("");
+      function Click(){
+	      if( $("#imgLeft").attr('src') == "img/img_1.png"){
+	    	  $("#imgLeft").attr('src', 'img/img_2.png');
+	      }else if($("#imgLeft").attr('src') == "img/img_2.png"){
+	    	  $("#imgLeft").attr('src', 'img/img_3.png');
+	      }else{
+	    	  $("#imgLeft").attr('src', 'img/img_1.png');
+	      }
+
       }
     </script>
   </head>
   <body>
     <p>
-
-    </p><p>
-      Reply: <span id="csprinterReply"></span>
-    </p><p>
-      <span id="error_message" class="error"></span>
+	<img src="img/img_1.png" width="120" id="imgLeft"  onclick="Click()" >
     </p>
   </body>
 </html>
