@@ -1,5 +1,5 @@
 <html lang="ja">
-  <head>
+　<head>
   <title>戦闘画面</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -8,11 +8,30 @@
     <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="js/jquery.serialize.js"></script>
     <script type="text/javascript" src="dwr/interface/MultiplePrinter.js"></script>
-   
+    <script type="text/javascript">
+    var turncount=0;
+    var enemyHP=900;
+    var enemyAT=20;
+    var mysumHP=1200;
+    var mysumAT=450;
+    var a=enemyHP;
+    function turnup(){
+    	turncount++;
+        $('#turn').text(turncount.toString());
+        if(turncount != 1){
+        a -= mysumAT;
+        }
+        $('#EHP').text(a.toString()+"/"+enemyHP.toString());
+     
+    }
+    
+    
+    </script>
   </head>
   <body>
     <p>
-turn <span id="turn"></span>
+turn <span id="turn"></span>    enemyHP<span id="EHP"></span><br/>
+<input value="たたかう" type="button" onclick="turnup()"/>
 
 
 
@@ -20,9 +39,9 @@ turn <span id="turn"></span>
     </p>
      <script type="text/javascript">
     (function(){
-    var count="1";
-    $('#turn').text(count);
+    	turnup();
     })();
+    
     </script>
   </body> 
 </html>
