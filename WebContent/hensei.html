@@ -2,6 +2,11 @@
   <head>
   <title>編成</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+  .border1 {
+  	border: double 10px #0000ff;
+  }
+  </style>
 
     <script type="text/javascript" src="dwr/engine.js"></script>
     <script type="text/javascript" src="dwr/util.js"></script>
@@ -9,21 +14,29 @@
     <script type="text/javascript" src="js/jquery.serialize.js"></script>
     <script type="text/javascript" src="dwr/interface/MultiplePrinter.js"></script>
     <script type="text/javascript">
-      function Click(){
-	      if( $("#imgLeft").attr('src') == "img/img_1.png"){
-	    	  $("#imgLeft").attr('src', 'img/img_2.png');
-	      }else if($("#imgLeft").attr('src') == "img/img_2.png"){
-	    	  $("#imgLeft").attr('src', 'img/img_3.png');
-	      }else{
-	    	  $("#imgLeft").attr('src', 'img/img_1.png');
-	      }
+    var kjid = "";
+    function Click(number){
+    	if(kjid == ""){
+    	  kjid ="#img"+number;
+  		 $(kjid).attr('class', "border1");
 
+    	  return;
+    	}else{
+     		$(kjid).attr('class', "");
+    		var kjid2="#img"+number;
+    		var src1 = $(kjid).attr('src');
+    		$(kjid).attr('src', $(kjid2).attr('src'));
+    		$(kjid2).attr('src', src1);
+    		kjid="";
+    	}
       }
     </script>
   </head>
   <body>
     <p>
-	<img src="img/img_1.png" width="120" id="imgLeft"  onclick="Click()" >
+	<img src="img/img_1.png" width="120" id="img1"onclick="Click(1)">
+	<img src="img/img_2.png" width="120" id="img2"onclick="Click(2)">
+	<img src="img/img_3.png" width="120" id="img3"onclick="Click(3)">
     </p>
   </body>
 </html>
