@@ -8,26 +8,21 @@
     <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="js/jquery.serialize.js"></script>
     <script type="text/javascript" src="dwr/interface/MultiplePrinter.js"></script>
-    <script type="text/javascript">
-      function update(){
-        var formData = $('#csprinter_form').serializeJson();
-        MultiplePrinter.execute(formData, {
-          callback: function(data) {
-            $('#csprinterReply').text(data);
-            $('#error_message').text("");
-          },
-          errorHandler: updateErrorMessage
-        });
-      }
-      function updateErrorMessage(message, exception){
-        $('#error_message').text(message);
-        $('#csprinterReply').text("");
-      }
-    </script>
+   
   </head>
   <body>
     <p>
+turn <span id="turn"></span>
+
+
+
 
     </p>
-  </body>
+     <script type="text/javascript">
+    (function(){
+    var count="1";
+    $('#turn').text(count);
+    })();
+    </script>
+  </body> 
 </html>
