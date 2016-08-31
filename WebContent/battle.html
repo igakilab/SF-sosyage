@@ -1,6 +1,6 @@
 <html lang="ja">
-  <head>
-  <title>メインメニュー</title>
+　<head>
+  <title>戦闘画面</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
     <script type="text/javascript" src="dwr/engine.js"></script>
@@ -9,33 +9,45 @@
     <script type="text/javascript" src="js/jquery.serialize.js"></script>
     <script type="text/javascript" src="dwr/interface/MultiplePrinter.js"></script>
     <script type="text/javascript">
-      function update(){
-        var formData = $('#csprinter_form').serializeJson();
-        MultiplePrinter.execute(formData, {
-          callback: function(data) {
-            $('#csprinterReply').text(data);
-            $('#error_message').text("");
-          },
-          errorHandler: updateErrorMessage
-        });
-      }
-      function updateErrorMessage(message, exception){
-        $('#error_message').text(message);
-        $('#csprinterReply').text("");
-      }
+    var turncount=0;
+    var enemyHP=900;
+    var enemyAT=20;
+    var mysumHP=1200;
+    var mysumAT=450;
+    var a=enemyHP;
+    var b=mysumHP;
+    function turnup(){
+    	turncount++;
+        $('#turn').text(turncount.toString());
+        if(turncount != 1){
+        a -= mysumAT;
+        b -= enemyAT;
+        }
+        
+     $('#EHP').text(a.toString()+"/"+enemyHP.toString());
+     $('#MHP').text(b.toString()+"/"+mysumHP.toString());
+    }
+    
+    
     </script>
   </head>
   <body>
     <p>
-      <form id="csprinter_form">
-        最値: <input type="text" name="max" value="10"/><br/>
-        指定した倍数の数字をaryokunに変える: <input type="text" name="multiple" value="3"/><br/>
-        <input value="Send" type="button" onclick="update()"/>
-      </form>
-    </p><p>
-      Reply: <span id="csprinterReply"></span>
-    </p><p>
-      <span id="error_message" class="error"></span>
+turn <span id="turn"></span>    enemyHP<span id="EHP"></span><img src="daikoudai.jpg"><textarea name="log" cols="50" rows="10"readonly></textarea><br>
+<input value="たたかう" type="button" onclick="turnup()"/><br>
+<img src="guraburu1.jpg"><img src="guraburu2.jpg"><img src="guraburu3.jpg"><br>
+mysumHP<span id="MHP"></span>
+
+
+
+
+
     </p>
-  </body>
+     <script type="text/javascript">
+    (function(){
+    	turnup();
+    })();
+    
+    </script>
+  </body> 
 </html>
