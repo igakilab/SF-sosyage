@@ -6,8 +6,8 @@
 
 <dwr>
   <allow>
-    <create creator="new" javascript="DBReader">
-      <param name="class" value="jp.ac.oit.igakilab.dwr.multiple.DBReader"/>
+    <create creator="new" javascript="TeamPrinter">
+      <param name="class" value="jp.ac.oit.igakilab.dwr.multiple.TeamPrinter"/>
     </create>
     <convert converter="bean" match="jp.ac.oit.igakilab.dwr.multiple.*" />
     <convert converter="exception" match="java.lang.Exception" />

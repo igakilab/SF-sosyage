@@ -13,6 +13,7 @@
     <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="js/jquery.serialize.js"></script>
     <script type="text/javascript" src="dwr/interface/MultiplePrinter.js"></script>
+
     <script type="text/javascript">
     var kjid = "";
     function Click(number){
@@ -34,9 +35,20 @@
   </head>
   <body>
     <p>
-	<img src="img/img_1.png" width="120" id="img1"onclick="Click(1)">
-	<img src="img/img_2.png" width="120" id="img2"onclick="Click(2)">
-	<img src="img/img_3.png" width="120" id="img3"onclick="Click(3)">
+	<img src="" width="120" id="img1"onclick="Click(1)">
+	<img src="" width="120" id="img2"onclick="Click(2)">
+	<img src="" width="120" id="img3"onclick="Click(3)">
     </p>
+    <script type="text/javascript">
+    var user = {userID:1};
+    TeamPrinter.fetch(user, {
+        callback: function(data) {
+          $('#csprinterReply').text(data);
+          $('#error_message').text("");
+        },
+        errorHandler: updateErrorMessage
+      });
+    }
+    </script>
   </body>
 </html>

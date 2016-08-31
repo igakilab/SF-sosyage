@@ -5,14 +5,14 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBReader {
 	//読み込むテーブル名
-	private String tableName;
-	public DBReader(String tableName) {
-		this.tableName = tableName;
+	public DBReader() {
 	}
-	public String doget() {
+	public String[] doget(String sql, int selectLength) {
 		//DBとのコネクション
 		Connection conn = null;
 		//DBの状態
@@ -20,38 +20,26 @@ public class DBReader {
 		//DBにSQL文を投げて戻ってきた結果
 		ResultSet rs = null;
 
-		//この2つのStringはSQL文のみに使うので、変数でなくともよい
-		//主キー
-		String pKey = "id";
-		//副キー
-		String sKey = "text";
-
-		//Stringの加算は遅いのでStringBuilderを使う(考え方が古い？)
-		StringBuilder sb = new StringBuilder();
+		List<String> list = new ArrayList<String>();
 
 		//ファイルに触る関係上例外発生の可能性があるためcatchできるように
 		try {
 			//DBと接続するのに必要,詳しく知りたいなら"Class.forName"で検索(難しい話が山ほど出てくる)
 			Class.forName("org.sqlite.JDBC");
 			//DBとのコネクションを張る
-			conn = DriverManager.getConnection("jdbc:sqlite:C:/pleiades/sqlite/test.sqlite");
+			conn = DriverManager.getConnection("jdbc:sqlite:C:/SQL/sqlite/SFSDB.sqlite");
 			//DBの状態を生成(？)
 			stmt = conn.createStatement();
 			//SQL文を実行し結果をrsに格納
-			rs = stmt.executeQuery("SELECT " + pKey + "," + sKey + " FROM " + tableName);
+			rs = stmt.executeQuery(sql);
 			//SELECT id, text FROM message
 			//これはmessageテーブルからid,textをすべて読み込んで返すSQL
 
 			//SQL文の結果が空になるまで1行ずつ読み込み
 			while (rs.next()) {
-				//主キーをStringBuilderに追加
-				sb.append(rs.getString(pKey));
-				//区切り文字を追加
-				sb.append(" : ");
-				//副キーを追加
-				sb.append(rs.getString(sKey));
-				//改行文字を追加(htmlに出す場合これだけじゃダメらしい)
-				sb.append("\n");
+				for (int i = 0; i < selectLength; ++i) {
+					list.add(rs.getString(i));
+				}
 			}
 		} catch(Exception e) {
 			//例外処理(スタックトレースを表示)
@@ -63,6 +51,6 @@ public class DBReader {
 			if (conn != null ) { try {conn.close(); } catch (SQLException e) {e.printStackTrace();} }
 		}
 		//StringBuilderの中身をStringにして返却
-		return sb.toString();
+		return (String[]) list.toArray();
 	}
 }
