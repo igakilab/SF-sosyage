@@ -15,14 +15,17 @@
     var mysumHP=1200;
     var mysumAT=450;
     var a=enemyHP;
+    var b=mysumHP;
     function turnup(){
     	turncount++;
         $('#turn').text(turncount.toString());
         if(turncount != 1){
         a -= mysumAT;
+        b -= enemyAT;
         }
-        $('#EHP').text(a.toString()+"/"+enemyHP.toString());
-     
+        
+     $('#EHP').text(a.toString()+"/"+enemyHP.toString());
+     $('#MHP').text(b.toString()+"/"+mysumHP.toString());
     }
     
     
@@ -30,8 +33,11 @@
   </head>
   <body>
     <p>
-turn <span id="turn"></span>    enemyHP<span id="EHP"></span><br/>
-<input value="たたかう" type="button" onclick="turnup()"/>
+turn <span id="turn"></span>    enemyHP<span id="EHP"></span><img src="daikoudai.jpg"><textarea name="log" cols="50" rows="10"readonly></textarea><br>
+<input value="たたかう" type="button" onclick="turnup()"/><br>
+<img src="guraburu1.jpg"><img src="guraburu2.jpg"><img src="guraburu3.jpg"><br>
+mysumHP<span id="MHP"></span>
+
 
 
 
