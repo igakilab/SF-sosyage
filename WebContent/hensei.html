@@ -2,36 +2,69 @@
   <head>
   <title>編成</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+  .border1 {
+  	border: double 10px #0000ff;
+  }
+  </style>
 
     <script type="text/javascript" src="dwr/engine.js"></script>
     <script type="text/javascript" src="dwr/util.js"></script>
     <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="js/jquery.serialize.js"></script>
-    <script type="text/javascript" src="dwr/interface/MultiplePrinter.js"></script>
+    <script type="text/javascript" src="dwr/interface/TeamPrinter.js"></script>
+
     <script type="text/javascript">
-      function update(){
-        var formData = $('#csprinter_form').serializeJson();
-        MultiplePrinter.execute(formData, {
-          callback: function(data) {
-            $('#csprinterReply').text(data);
-            $('#error_message').text("");
-          },
-          errorHandler: updateErrorMessage
-        });
-      }
-      function updateErrorMessage(message, exception){
-        $('#error_message').text(message);
-        $('#csprinterReply').text("");
+    var kjid = 0;
+    function Click(number){
+    	if(kjid == 0){
+    	  kjid =number;
+  		 $("#"+kjid).attr('class', "border1");
+
+    	  return;
+    	}else{
+    		var user2 = {userID:1,userspot1:kjid,userspot2:number};
+    		TeamPrinter.changeslot(user2,{
+    			 callback: function(data) {
+    		        	for (var i = 1; i <= 3; ++i) {
+    		        		$('#' + i).attr('src', 'img/character/' + data[i - 1]);
+    		        	}
+    		          //$('#error_message').text("");
+    		        },
+    		        errorHandler: updateErrorMessage
+    		      });
+    		$("#"+kjid).attr('class', "");
+     		/*
+    		var kjid2="#"+number;
+    		var src1 = $(kjid).attr('src');
+    		$(kjid).attr('src', $(kjid2).attr('src'));
+    		$(kjid2).attr('src', src1);*/
+    		kjid=0;
+    	}
       }
     </script>
   </head>
   <body>
     <p>
-
-    </p><p>
-      Reply: <span id="csprinterReply"></span>
-    </p><p>
-      <span id="error_message" class="error"></span>
+	<img src="" width="120" id= 1 onclick="Click(1)">
+	<img src="" width="120" id= 2 onclick="Click(2)">
+	<img src="" width="120" id= 3 onclick="Click(3)">
     </p>
+    <script type="text/javascript">
+    var user = {userID:1,userspot1:0,userspot2:0};
+    TeamPrinter.fetchslot(user, {
+        callback: function(data) {
+        	for (var i = 1; i <= 3; ++i) {
+        		$('#' + i).attr('src', 'img/character/' + data[i - 1]);
+        	}
+          //$('#error_message').text("");
+        },
+        errorHandler: updateErrorMessage
+      });
+    function updateErrorMessage(message, exception){
+      //$('#error_message').text(message);
+      //$('#csprinterReply').text("");
+    }
+    </script>
   </body>
 </html>
