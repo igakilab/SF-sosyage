@@ -9,6 +9,9 @@
     <create creator="new" javascript="MultiplePrinter">
       <param name="class" value="jp.ac.oit.igakilab.dwr.multiple.MultiplePrinter"/>
     </create>
+    <create creator="new" javascript="BattleSystem">
+      <param name="class" value="jp.ac.oit.igakilab.dwr.multiple.BattleSystem"/>
+    </create>
     <create creator="new" javascript="TeamPrinter">
       <param name="class" value="jp.ac.oit.igakilab.dwr.multiple.TeamPrinter"/>
     </create>

@@ -1,53 +1,69 @@
 <html lang="ja">
-　<head>
-  <title>戦闘画面</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<head>
+<title>戦闘画面</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <script type="text/javascript" src="dwr/engine.js"></script>
-    <script type="text/javascript" src="dwr/util.js"></script>
-    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript" src="js/jquery.serialize.js"></script>
-    <script type="text/javascript" src="dwr/interface/MultiplePrinter.js"></script>
-    <script type="text/javascript">
-    var turncount=0;
-    var enemyHP=900;
-    var enemyAT=20;
-    var mysumHP=1200;
-    var mysumAT=450;
-    var a=enemyHP;
-    var b=mysumHP;
-    function turnup(){
-    	turncount++;
-        $('#turn').text(turncount.toString());
-        if(turncount != 1){
-        a -= mysumAT;
-        b -= enemyAT;
-        }
-        
-     $('#EHP').text(a.toString()+"/"+enemyHP.toString());
-     $('#MHP').text(b.toString()+"/"+mysumHP.toString());
-    }
-    
-    
-    </script>
-  </head>
-  <body>
-    <p>
-turn <span id="turn"></span>    enemyHP<span id="EHP"></span><img src="daikoudai.jpg"><textarea name="log" cols="50" rows="10"readonly></textarea><br>
-<input value="たたかう" type="button" onclick="turnup()"/><br>
-<img src="guraburu1.jpg"><img src="guraburu2.jpg"><img src="guraburu3.jpg"><br>
-mysumHP<span id="MHP"></span>
+<script type="text/javascript" src="dwr/engine.js"></script>
+<script type="text/javascript" src="dwr/util.js"></script>
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="js/jquery.serialize.js"></script>
+<script type="text/javascript" src="dwr/interface/BattleSystem.js"></script>
+<script type="text/javascript">
+	var turncount=0;
+	//turnの変数
+	var enemyHP = 1200;
+	//敵の体力
+	var enemyAT = 200;
+	//敵の攻撃力
+	var mysumHP=0;
+	//自分のパーティーの体力
+	var mysumAT=0;
+	//自分のパーティーの攻撃力
+	var a = enemyHP;
+	//敵の現体力
+	var b = mysumHP;
+	//自分のパーティーの現体力
+
+	BattleSystem.getatkhp(1, {
+		callback : function(data) {
+			mysumAT = parseInt(data[0]);
+			mysumHP = parseInt(data[1]);
+			b=mysumHP;
+			(function() {
+				turnup();
+			})();
+		}
+	});
+
+	function turnup() {
+		turncount++;
+		$('#turn').text(turncount.toString());
+		if (turncount != 1) {
+			a -= mysumAT;
+			b -= enemyAT;
+		}
+
+		$('#EHP').text(a.toString() + "/" + enemyHP.toString());
+		$('#MHP').text(b.toString() + "/" + mysumHP.toString());
+	}
+</script>
+</head>
+<body>
+	<p>
+		turn <span id="turn"></span> enemyHP<span id="EHP"></span><img
+			src="daikoudai.jpg">
+		<textarea name="log" cols="50" rows="10" readonly></textarea>
+		<br> <input value="たたかう" type="button" onclick="turnup()" /><br>
+		<img src="guraburu1.jpg"><img src="guraburu2.jpg"><img
+			src="guraburu3.jpg"><br> mysumHP<span id="MHP"></span>
 
 
 
 
 
-    </p>
-     <script type="text/javascript">
-    (function(){
-    	turnup();
-    })();
-    
-    </script>
-  </body> 
+	</p>
+	<script type="text/javascript">
+		
+	</script>
+</body>
 </html>
