@@ -8,6 +8,7 @@
 <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" src="js/jquery.serialize.js"></script>
 <script type="text/javascript" src="dwr/interface/BattleSystem.js"></script>
+<script type="text/javascript" src="dwr/interface/TeamPrinter.js"></script>
 <script type="text/javascript">
 	var turncount = 0;
 	//turnの変数
@@ -32,6 +33,22 @@
 			$("#enemyimg").attr("src", "img/" + enedata[2]);
 		}
 	});
+	var user = {userID:1,userspot1:0,userspot2:0};
+	TeamPrinter.fetchslot(user,{
+		callback : function(partyimg) {
+			$("#partymember1").attr("src", "img/character/" + partyimg[0]);
+			$("#partymember2").attr("src", "img/character/" + partyimg[1]);
+			$("#partymember3").attr("src", "img/character/" + partyimg[2]);
+		}
+	});
+			
+			
+			
+			
+			
+			
+			
+			
 
 	BattleSystem.getatkhp(1, {
 		callback : function(data) {
@@ -60,12 +77,12 @@
 </head>
 <body>
 	<p>
-		turn <span id="turn"></span> enemyHP<span id="EHP"></span><img
+		turn <span id="turn"></span> enemyHP<span id="EHP"></span> <img
 			id="enemyimg" src="">
 		<textarea name="log" cols="50" rows="10" readonly></textarea>
 		<br> <input value="たたかう" type="button" onclick="turnup()" /><br>
-		<img src="img/guraburu1.png"><img src="img/guraburu2.png"><img
-			src="img/guraburu3.png"><br> mysumHP<span id="MHP"></span>
+		<img id="partymember1" src=""> <img id="partymember2" src="">
+		<img id="partymember3" src=""> <br> mysumHP<span id="MHP"></span>
 
 
 
