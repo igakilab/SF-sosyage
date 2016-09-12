@@ -9,9 +9,9 @@ public class TeamPrinter {
         int userID = user.getuserID();
         DBController reader = new DBController();
 
-        String[] result = reader.doget("SELECT slot1,slot2,slot3 FROM user WHERE userID = " + userID, 3);
+        String[] result = reader.doget("SELECT slot1,slot2,slot3 FROM user WHERE userID = " + userID);
         for (int i = 0; i < 3; ++i) {
-        	list.add(reader.doget("SELECT imgaddr FROM sfchara WHERE charaID = " + result[i], 1)[0]);
+        	list.add(reader.doget("SELECT imgaddr FROM sfchara WHERE charaID = " + result[i])[0]);
         }
 
         return list;
@@ -22,7 +22,7 @@ public class TeamPrinter {
         int spot2 = user.getuserspot2();
 
         DBController reader = new DBController();
-        String[] slotch = reader.doget("SELECT slot"+ spot1 + ",slot" + spot2 +" FROM user WHERE userID = " + userID, 2);
+        String[] slotch = reader.doget("SELECT slot"+ spot1 + ",slot" + spot2 +" FROM user WHERE userID = " + userID);
 
         reader.dowrite("UPDATE user SET "
         				+ "slot"+ spot1 + "=" + slotch[1] +
