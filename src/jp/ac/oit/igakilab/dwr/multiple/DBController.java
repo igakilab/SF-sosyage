@@ -15,7 +15,6 @@ public class DBController {
 	private static final String SCHEMA = "SFSDB";
 	private static final String USER = "root";
 	private static final String PASSWORD = "igakilabSF";
-
 	public void dowrite(String sql) {
 		// DBとのコネクション
 		Connection conn = null;
@@ -27,11 +26,12 @@ public class DBController {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			// DBとのコネクションを張る
 			conn = DriverManager
-					.getConnection("jdbc:mysql://localhost/" + SCHEMA + "?user=" + USER + "&password=" + PASSWORD);
+			.getConnection("jdbc:mysql://localhost/" + SCHEMA + "?user=" + USER + "&password=" + PASSWORD);
 			// DBの状態を生成(？)
 			stmt = conn.createStatement();
 			// SQL文を実行
 			stmt.executeUpdate(sql);
+
 		} catch (Exception e) {
 			// 例外処理(スタックトレースを表示)
 			e.printStackTrace();
@@ -103,5 +103,6 @@ public class DBController {
 		}
 		// リストを配列に戻して返却
 		return list.toArray(new String[0]);
+
 	}
 }
