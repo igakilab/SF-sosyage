@@ -5,6 +5,7 @@ import java.util.List;
 
 public class BattleSystem {
 	public List<String> getatkhp(int userID) throws InvalidValueException {
+		// 自分のパーティのATとHPを返す
 		List<String> list = new ArrayList<>();
 
 		DBController reader = new DBController();
@@ -24,6 +25,7 @@ public class BattleSystem {
 	}
 
 	public List<String> getenemy(int eneID) throws InvalidValueException {
+		// 敵のHPとATと画像のアドレスを返す
 		List<String> list = new ArrayList<>();
 
 		DBController reader = new DBController();
@@ -32,7 +34,18 @@ public class BattleSystem {
 		list.add(String.valueOf(result[0]));
 		list.add(String.valueOf(result[1]));
 		list.add(String.valueOf(result[2]));
-		
+
+		return list;
+	}
+
+	public List<String> getturn(int userID) throws InvalidValueException {
+
+		List<String> list = new ArrayList<>();
+		DBController reader = new DBController();
+
+		String[] result = reader.doget("SELECT turn FROM user WHERE userID = " + userID, 1);
+		list.add(String.valueOf(result[0]));
+
 		return list;
 	}
 }

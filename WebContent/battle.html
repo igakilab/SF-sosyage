@@ -10,22 +10,33 @@
 <script type="text/javascript" src="dwr/interface/BattleSystem.js"></script>
 <script type="text/javascript" src="dwr/interface/TeamPrinter.js"></script>
 <script type="text/javascript">
-	var turncount = 0;
+	var userID = 1;
+	//userID,これはパスワードなどで判別できるようにする
+	var turncount;
 	//turnの変数
 	var enemyHP;
 	//敵の体力
 	var enemyAT;
 	//敵の攻撃力
-	var mysumHP = 0;
+	var mysumHP;
 	//自分のパーティーの体力
-	var mysumAT = 0;
+	var mysumAT;
 	//自分のパーティーの攻撃力
-	var a = enemyHP;
+	var a;
 	//敵の現体力
-	var b = mysumHP;
+	var b;
 	//自分のパーティーの現体力
+	
+	BattleSystem.getturn(userID,{
+		callback : function(turndata){
+			turncount = parseInt(turndata[0]);
+		}
+	});
+	
+	
 
 	BattleSystem.getenemy(1, {
+		//1とはステージを表している
 		callback : function(enedata) {
 			enemyHP = parseInt(enedata[0]);
 			enemyAT = parseInt(enedata[1]);
@@ -33,22 +44,18 @@
 			$("#enemyimg").attr("src", "img/" + enedata[2]);
 		}
 	});
-	var user = {userID:1,userspot1:0,userspot2:0};
-	TeamPrinter.fetchslot(user,{
+	var user = {
+		userID : userID,
+		userspot1 : 0,
+		userspot2 : 0
+	};
+	TeamPrinter.fetchslot(user, {
 		callback : function(partyimg) {
 			$("#partymember1").attr("src", "img/character/" + partyimg[0]);
 			$("#partymember2").attr("src", "img/character/" + partyimg[1]);
 			$("#partymember3").attr("src", "img/character/" + partyimg[2]);
 		}
 	});
-			
-			
-			
-			
-			
-			
-			
-			
 
 	BattleSystem.getatkhp(1, {
 		callback : function(data) {
@@ -83,10 +90,6 @@
 		<br> <input value="たたかう" type="button" onclick="turnup()" /><br>
 		<img id="partymember1" src=""> <img id="partymember2" src="">
 		<img id="partymember3" src=""> <br> mysumHP<span id="MHP"></span>
-
-
-
-
 
 	</p>
 	<script type="text/javascript">
