@@ -64,8 +64,10 @@
 		callback:function(data){
 			for(var i = 1;i<=data.length;++i){
 				var idd=i+3;
+				if(data[i]>0){
 				$("#textbox").html($("#textbox").html()+'<img src="" width="120" id ='+idd+' onclick="Click('+idd+')">');
-				$('#' + idd).attr('src', 'img/character/' + data[i - 1]);
+				$('#' + idd).attr('src', 'img/character/img_'+i+'.png');
+				}
 			}
 		}
 	});

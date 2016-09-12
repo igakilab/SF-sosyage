@@ -12,10 +12,7 @@ public class CharacterCatcher {
         String sql;
         for(int i=1;i<=count;i++){
             sql = "SELECT chara" + i +" FROM user WHERE userID = " + userID;
-            String[] result=reader.doget(sql);
-            if(result[0] != "0"){
-            	list.add(reader.doget("SELECT imgaddr FROM sfchara WHERE charaID = " + i)[0]);
-            }
+            	list.add(reader.doget(sql)[0]);
         }
 
         return list;
