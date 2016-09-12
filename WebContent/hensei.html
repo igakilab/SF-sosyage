@@ -13,7 +13,7 @@
     <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="js/jquery.serialize.js"></script>
     <script type="text/javascript" src="dwr/interface/TeamPrinter.js"></script>
-
+	<script type="text/javascript" src="dwr/interface/CharacterCatcher.js"></script>
     <script type="text/javascript">
     var kjid = 0;
     function Click(number){
@@ -22,7 +22,8 @@
   		 $("#"+kjid).attr('class', "border1");
 
     	  return;
-    	}else{
+    	}else if(kjid<4 && number>3){
+    		number = number - 3;
     		var user2 = {userID:1,userspot1:kjid,userspot2:number};
     		TeamPrinter.changeslot(user2,{
     			 callback: function(data) {
@@ -43,6 +44,7 @@
     	}
       }
     </script>
+
   </head>
   <body>
     <p>
@@ -50,6 +52,24 @@
 	<img src="" width="120" id= 2 onclick="Click(2)">
 	<img src="" width="120" id= 3 onclick="Click(3)">
     </p>
+	<p>
+    <br></br>
+    </p>
+    <p>
+    <div id = "textbox">
+    </div>
+ 	<script type="text/javascript">
+	var user = {userID:1,userspot1:0,userspot2:0};
+	CharacterCatcher.characterfetch(user,{
+		callback:function(data){
+			for(var i = 1;i<=data.length;++i){
+				var idd=i+3;
+				$("#textbox").html($("#textbox").html()+'<img src="" width="120" id ='+idd+' onclick="Click('+idd+')">');
+				$('#' + idd).attr('src', 'img/character/' + data[i - 1]);
+			}
+		}
+	});
+    </script>
     <script type="text/javascript">
     var user = {userID:1,userspot1:0,userspot2:0};
     TeamPrinter.fetchslot(user, {
