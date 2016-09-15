@@ -26,7 +26,7 @@ public class DBController {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			// DBとのコネクションを張る
 			conn = DriverManager
-			.getConnection("jdbc:mysql://150.89.234.221/" + SCHEMA + "?user=" + USER + "&password=" + PASSWORD);
+			.getConnection("jdbc:mysql://150.89.234.221" + SCHEMA + "?user=" + USER + "&password=" + PASSWORD);
 			// DBの状態を生成(？)
 			stmt = conn.createStatement();
 			// SQL文を実行
