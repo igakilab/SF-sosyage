@@ -88,6 +88,9 @@
 		callback:function(data2){
 			for(var i = 1;i<=data2.length;++i){
 				var id=i;
+				if($('#charabox').length){
+    				$("#charabox").html($(#charabox).html()+"");
+				}
 				if(data2[i]>0&&i!=slotdata[0]&&i!=slotdata[1]&&i!=slotdata[2]){
 				$("#charabox").html($("#charabox").html()+'<img src="" width="120" id ='+id+' onclick="Click('+id+')">');
 				$('#' + id).attr('src', 'img/character/img_'+i+'.png');
