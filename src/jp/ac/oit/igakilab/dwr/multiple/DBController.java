@@ -13,8 +13,8 @@ public class DBController {
 	// スキーマ名、ユーザ名、パスワードはMySQLとの接続に必要なため
 	// ここで定数として定義しておく、使う時はここ変えてね
 	private static final String SCHEMA = "SFSDB";
-	private static final String USER = "root";
-	private static final String PASSWORD = "igakilabSF";
+	private static final String USER = "akimoto";
+	private static final String PASSWORD = "aaaa";
 	public void dowrite(String sql) {
 		// DBとのコネクション
 		Connection conn = null;
@@ -26,7 +26,7 @@ public class DBController {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			// DBとのコネクションを張る
 			conn = DriverManager
-			.getConnection("jdbc:mysql://localhost/" + SCHEMA + "?user=" + USER + "&password=" + PASSWORD);
+			.getConnection("jdbc:mysql://150.89.234.221" + SCHEMA + "?user=" + USER + "&password=" + PASSWORD);
 			// DBの状態を生成(？)
 			stmt = conn.createStatement();
 			// SQL文を実行
@@ -64,7 +64,7 @@ public class DBController {
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			conn = DriverManager
-					.getConnection("jdbc:mysql://localhost/" + SCHEMA + "?user=" + USER + "&password=" + PASSWORD);
+					.getConnection("jdbc:mysql://150.89.234.221/" + SCHEMA + "?user=" + USER + "&password=" + PASSWORD);
 			stmt = conn.createStatement();
 			// SQL文を実行し結果をrsに格納
 			rs = stmt.executeQuery(sql);
