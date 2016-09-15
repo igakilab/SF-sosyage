@@ -22,37 +22,42 @@
   		 $("#"+kjid).attr('class', "border1");
     	 return;
     	}else if(number!=kjid){
+    		var s1=1;
+			var s2=2;
     		//2回目のキャラクタークリック//
     		if(kjid==slotdata[0]||kjid==slotdata[1]||kjid==slotdata[2]){
     			if(number==slotdata[0]||number==slotdata[1]||number==slotdata[2]){
     				//クリック判定、1回目がスロットで2回目がスロットのパターン//
-    	    		var user2 = {userID:1,userspot1:kjid,userspot2:number};
+    				for(i=1;i<=3;++i){
+    					if(slotdata[i-1]==kjid){
+    						s1=i;
+    					}else if(slotdata[i-1]==number){
+    						s2=i;
+    					}
+    				}
+    	    		var user2 = {userID:1,userspot1:s1,userspot2:s2};
         				TeamPrinter.changeslot(user2,{
-        			 		callback: function(data) {
-        		        		for (var i = 1; i <= 3; ++i) {
-        		        			$('#' + slotdata[i]).attr('src', 'img/character/' + data[i - 1]);
-        		        			slotdata[i]=data[i];
-        		        		}
+        			 		callback: function() {
+        		        		fetchslot();
         		        		characterfetch();
         		        	}
         		      });
+    			}else{
+    				for(i=1;i<=3;++i){
+    					if(slotdata[i-1]==kjid){
+    						s1=i;
+    					}
+    				}
+    				s2=number;
+    	    		var user2 = {userID:1,userspot1:s1,userspot2:s2};
+    				TeamPrinter.changeslot2(user2,{
+    			 		callback: function() {
+    		        		fetchslot();
+    		        		characterfetch();
+    		        	}
+    		      });
     			}
     		}
-    		number = number - 3;
-    		var user2 = {userID:1,userspot1:kjid,userspot2:number};
-    		TeamPrinter.changeslot(user2,{
-    			 callback: function(data) {
-    		        	for (var i = 1; i <= 3; ++i) {
-    		        		$('#' + i).attr('src', 'img/character/' + data[i - 1]);
-    		        	}
-    		        }
-    		      });
-    		$("#"+kjid).attr('class', "");
-     		/*
-    		var kjid2="#"+number;
-    		var src1 = $(kjid).attr('src');
-    		$(kjid).attr('src', $(kjid2).attr('src'));
-    		$(kjid2).attr('src', src1);*/
     		kjid=0;
     	}
       }
@@ -72,25 +77,28 @@
     <script type="text/javascript">
     var user = {userID:1,userspot1:0,userspot2:0};
     var slotdata;
+    function fetchslot(){
     TeamPrinter.fetchslot(user, {
         callback: function(data) {
+			if($('#textbox').length){
+				$("#textbox").empty();
+			}
         	slotdata=data;
         	for(var i = 0;i<data.length;++i){
 				$("#textbox").html($("#textbox").html()+'<img src="" width="120" id ='+data[i]+' onclick="Click('+data[i]+')">');
 				$('#' + data[i]).attr('src', 'img/character/img_'+data[i]+'.png');
 				}
         	}
-      }
-
-    );
+      	}
+    );}
     function characterfetch (){
     TeamPrinter.characterfetch(user,{
 		callback:function(data2){
+			if($('#charabox').length){
+				$("#charabox").empty();
+			}
 			for(var i = 1;i<=data2.length;++i){
 				var id=i;
-				if($('#charabox').length){
-    				$("#charabox").html("");
-				}
 				if(data2[i]>0&&i!=slotdata[0]&&i!=slotdata[1]&&i!=slotdata[2]){
 				$("#charabox").html($("#charabox").html()+'<img src="" width="120" id ='+id+' onclick="Click('+id+')">');
 				$('#' + id).attr('src', 'img/character/img_'+i+'.png');
@@ -99,6 +107,7 @@
 			}
 		}
     );}
+    fetchslot();
     characterfetch();
     </script>
   </body>

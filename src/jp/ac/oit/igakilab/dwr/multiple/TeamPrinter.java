@@ -17,7 +17,7 @@ public class TeamPrinter {
 	}
 
 
-	public List<String> changeslot(LoginData user) throws InvalidValueException {
+	public void changeslot(LoginData user) throws InvalidValueException {
 		int userID = user.getuserID();
 		int spot1 = user.getuserspot1();
 		int spot2 = user.getuserspot2();
@@ -29,8 +29,18 @@ public class TeamPrinter {
 
 		reader.dowrite("UPDATE user SET " + "slot" + spot1 + "=" + slotch[1] + ", slot" + spot2 + "=" + slotch[0]
 				+ " WHERE userID = " + userID);
+	}
+	public void changeslot2(LoginData user) throws InvalidValueException {
+		int userID = user.getuserID();
+		int spot1 = user.getuserspot1();
+		int spot2 = user.getuserspot2();
 
-		return fetchslot(user);
+		DBController reader = new DBController();
+
+		String[] slotch = reader.doget("SELECT slot" + spot1 + " FROM user WHERE userID = " + userID);
+
+
+		reader.dowrite("UPDATE user SET " + "slot" + spot1 + "=" + spot2 + " WHERE userID = " + userID);
 	}
 	public List<String> characterfetch(LoginData user) throws InvalidValueException {
         List<String> list = new ArrayList<>();
