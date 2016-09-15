@@ -25,8 +25,15 @@
     		var s1=1;
 			var s2=2;
     		//2回目のキャラクタークリック//
-    		if(kjid==slotdata[0]||kjid==slotdata[1]||kjid==slotdata[2]){
-    			if(number==slotdata[0]||number==slotdata[1]||number==slotdata[2]){
+    		var iskslot=(kjid==slotdata[0]||kjid==slotdata[1]||kjid==slotdata[2]);
+    		var isnslot=(number==slotdata[0]||number==slotdata[1]||number==slotdata[2]);
+    		if (!iskslot && !isnslot) {
+        		$("#"+kjid).attr('class', "");
+        		kjid=0;
+    			return;
+    		}
+    		if(iskslot){
+    			if(isnslot){
     				//クリック判定、1回目がスロットで2回目がスロットのパターン//
     				for(i=1;i<=3;++i){
     					if(slotdata[i-1]==kjid){
@@ -48,8 +55,7 @@
     						s1=i;
     					}
     				}
-    				s2=number;
-    	    		var user2 = {userID:1,userspot1:s1,userspot2:s2};
+    	    		var user2 = {userID:1,userspot1:s1,userspot2:number};
     				TeamPrinter.changeslot2(user2,{
     			 		callback: function() {
     		        		fetchslot();
@@ -57,7 +63,21 @@
     		        	}
     		      });
     			}
+    		}else if(isnslot){
+    			for(i=1;i<=3;++i){
+					if(slotdata[i-1]==number){
+						s1=i;
+					}
+    			}
+	    		var user2 = {userID:1,userspot1:s1,userspot2:kjid};
+				TeamPrinter.changeslot2(user2,{
+			 		callback: function() {
+		        		fetchslot();
+		        		characterfetch();
+		        	}
+		      });
     		}
+    		$("#"+kjid).attr('class', "border1");
     		kjid=0;
     	}
       }
