@@ -2,7 +2,23 @@
 <head>
 <title>戦闘画面</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+.gauge_wrap li>div {
+	background: -moz-linear-gradient(top, #555, #222);
+	background: -webkit-gradient(linear, left top, left bottom, from(#555),
+		to(#222));
+	border: solid 5px #000;
+	width: 300px;
+	/* height: 32px;*/
+}
 
+.gauge_wrap .gauge_main {
+	background: -moz-linear-gradient(top, #9FF, #0FF);
+	background: -webkit-gradient(linear, left top, left bottom, from(#9FF),
+		to(#0FF));
+	height: 22px;
+}
+</style>
 <script type="text/javascript" src="dwr/engine.js"></script>
 <script type="text/javascript" src="dwr/util.js"></script>
 <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
@@ -26,14 +42,12 @@
 	//敵の現体力
 	var b;
 	//自分のパーティーの現体力
-	
-	BattleSystem.getturn(userID,{
-		callback : function(turndata){
+
+	BattleSystem.getturn(userID, {
+		callback : function(turndata) {
 			turncount = parseInt(turndata[0]);
 		}
 	});
-	
-	
 
 	BattleSystem.getenemy(1, {
 		//1とはステージを表している
@@ -78,26 +92,40 @@
 		}
 
 		$('#EHP').text(a.toString() + "/" + enemyHP.toString());
-		
-		
+
 		$('#MHP').text(b.toString() + "/" + mysumHP.toString());
-		
-		
+
 	}
 </script>
 </head>
 <body>
-	<p>
-		turn <span id="turn"></span> enemyHP<span id="EHP"></span> <img
-			id="enemyimg" src="">
-		<textarea name="log" cols="50" rows="10" readonly></textarea>
-		<br> <input value="たたかう" type="button" onclick="turnup()" /><br>
-		<img id="partymember1" src=""> <img id="partymember2" src="">
-		<img id="partymember3" src=""> <br> mysumHP<span id="MHP"></span>
 
-	</p>
+	<ul class="gauge_wrap">
+		<li>
+			<div>
+				<div class="gauge_main" style="width: 80%;"></div>
+			</div>
+		</li>
+	</ul>
+
+
+	turn
+	<span id="turn"></span> enemyHP
+	<span id="EHP"></span>
+	<img id="enemyimg" src="">
+	<textarea name="log" cols="50" rows="10" readonly></textarea>
+	<br>
+	<input value="たたかう" type="button" onclick="turnup()" />
+	<br>
+	<img id="partymember1" src="" width="160">
+	<img id="partymember2" src="" width="160">
+	<img id="partymember3" src="" width="160">
+	<br> mysumHP
+	<span id="MHP"></span>
+
+
 	<script type="text/javascript">
-		
+
 	</script>
 </body>
 </html>
