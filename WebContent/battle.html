@@ -89,12 +89,18 @@
 		if (turncount != 1) {
 			a -= mysumAT;
 			b -= enemyAT;
+			$('#log').val($('#log').val()+mysumAT+"のダメージを与えた\n");
+
+			$('#log').val($('#log').val()+enemyAT+"のダメージを受けた\n");
+
 		}
 
 		$('#EHP').text(a.toString() + "/" + enemyHP.toString());
 
+		$('.gauge_main').css('width',(100*a/enemyHP)+'%');
 		$('#MHP').text(b.toString() + "/" + mysumHP.toString());
-
+		
+		
 	}
 </script>
 </head>
@@ -113,7 +119,7 @@
 	<span id="turn"></span> enemyHP
 	<span id="EHP"></span>
 	<img id="enemyimg" src="">
-	<textarea name="log" cols="50" rows="10" readonly></textarea>
+	<textarea id="log" name="log" cols="50" rows="10" readonly></textarea>
 	<br>
 	<input value="たたかう" type="button" onclick="turnup()" />
 	<br>
