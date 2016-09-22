@@ -15,8 +15,15 @@
     <create creator="new" javascript="TeamPrinter">
       <param name="class" value="jp.ac.oit.igakilab.dwr.multiple.TeamPrinter"/>
     </create>
+     <create creator="new" javascript="CharacterCatcher">
+      <param name="class" value="jp.ac.oit.igakilab.dwr.multiple.CharacterCatcher"/>
+    </create>
+         <create creator="new" javascript="GachaSystem">
+      <param name="class" value="jp.ac.oit.igakilab.dwr.multiple.GachaSystem"/>
+    </create>
     <convert converter="bean" match="jp.ac.oit.igakilab.dwr.multiple.*" />
     <convert converter="exception" match="java.lang.Exception" />
     <convert converter="bean" match="java.lang.StackTraceElement"/>
+
   </allow>
 </dwr>
