@@ -1,0 +1,36 @@
+<html lang="ja">
+  <head>
+  <title>ログイン</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <script type="text/javascript" src="dwr/engine.js"></script>
+    <script type="text/javascript" src="dwr/util.js"></script>
+    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery.serialize.js"></script>
+    <script type="text/javascript" src="dwr/interface/GachaSystem.js"></script>
+    <script type="text/javascript">
+      function gacha(){
+    	  var user = {userID:1,userspot1:0,userspot2:0};
+    	  GachaSystem.gachakekka(user,{
+          callback: function(data) {
+        	  $("#"+1).attr('src', 'img/character/img_' + data + ".png");
+          },
+          errorHandler: updateErrorMessage
+        });
+      }
+      function updateErrorMessage(message, exception){
+        $('#error_message').text(message);
+        $('#csprinterReply').text("");
+      }
+    </script>
+  </head>
+  <body>
+    <p>
+	ログインします
+	ログインID<input type="text" name="ログインID"/>
+	</p>
+
+	<br></br>
+    <input value="ガチャ" type="button" onclick="gacha()" />
+  </body>
+</html>
