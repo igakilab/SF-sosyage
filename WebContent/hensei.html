@@ -13,33 +13,71 @@
     <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="js/jquery.serialize.js"></script>
     <script type="text/javascript" src="dwr/interface/TeamPrinter.js"></script>
-	<script type="text/javascript" src="dwr/interface/CharacterCatcher.js"></script>
     <script type="text/javascript">
     var kjid = 0;
     function Click(number){
     	if(kjid == 0){
-    	  kjid =number;
+    	//1回目のキャラクタークリック//
+    	 kjid =number;
   		 $("#"+kjid).attr('class', "border1");
-
-    	  return;
-    	}else if(kjid<4 && number>3){
-    		number = number - 3;
-    		var user2 = {userID:1,userspot1:kjid,userspot2:number};
-    		TeamPrinter.changeslot(user2,{
-    			 callback: function(data) {
-    		        	for (var i = 1; i <= 3; ++i) {
-    		        		$('#' + i).attr('src', 'img/character/' + data[i - 1]);
+    	 return;
+    	}else if(number!=kjid){
+    		var s1=1;
+			var s2=2;
+    		//2回目のキャラクタークリック//
+    		var iskslot=(kjid==slotdata[0]||kjid==slotdata[1]||kjid==slotdata[2]);
+    		var isnslot=(number==slotdata[0]||number==slotdata[1]||number==slotdata[2]);
+    		if (!iskslot && !isnslot) {
+        		$("#"+kjid).attr('class', "");
+        		kjid=0;
+    			return;
+    		}
+    		if(iskslot){
+    			if(isnslot){
+    				//クリック判定、1回目がスロットで2回目がスロットのパターン//
+    				for(i=1;i<=3;++i){
+    					if(slotdata[i-1]==kjid){
+    						s1=i;
+    					}else if(slotdata[i-1]==number){
+    						s2=i;
+    					}
+    				}
+    	    		var user2 = {userID:1,userspot1:s1,userspot2:s2};
+        				TeamPrinter.changeslot(user2,{
+        			 		callback: function() {
+        		        		fetchslot();
+        		        		characterfetch();
+        		        	}
+        		      });
+    			}else{
+    				for(i=1;i<=3;++i){
+    					if(slotdata[i-1]==kjid){
+    						s1=i;
+    					}
+    				}
+    	    		var user2 = {userID:1,userspot1:s1,userspot2:number};
+    				TeamPrinter.changeslot2(user2,{
+    			 		callback: function() {
+    		        		fetchslot();
+    		        		characterfetch();
     		        	}
-    		          //$('#error_message').text("");
-    		        },
-    		        errorHandler: updateErrorMessage
     		      });
-    		$("#"+kjid).attr('class', "");
-     		/*
-    		var kjid2="#"+number;
-    		var src1 = $(kjid).attr('src');
-    		$(kjid).attr('src', $(kjid2).attr('src'));
-    		$(kjid2).attr('src', src1);*/
+    			}
+    		}else if(isnslot){
+    			for(i=1;i<=3;++i){
+					if(slotdata[i-1]==number){
+						s1=i;
+					}
+    			}
+	    		var user2 = {userID:1,userspot1:s1,userspot2:kjid};
+				TeamPrinter.changeslot2(user2,{
+			 		callback: function() {
+		        		fetchslot();
+		        		characterfetch();
+		        	}
+		      });
+    		}
+    		$("#"+kjid).attr('class', "border1");
     		kjid=0;
     	}
       }
@@ -47,44 +85,50 @@
 
   </head>
   <body>
-    <p>
-	<img src="" width="120" id= 1 onclick="Click(1)">
-	<img src="" width="120" id= 2 onclick="Click(2)">
-	<img src="" width="120" id= 3 onclick="Click(3)">
-    </p>
 	<p>
     <br></br>
     </p>
     <p>
     <div id = "textbox">
     </div>
- 	<script type="text/javascript">
-	var user = {userID:1,userspot1:0,userspot2:0};
-	CharacterCatcher.characterfetch(user,{
-		callback:function(data){
-			for(var i = 1;i<=data.length;++i){
-				var idd=i+3;
-				$("#textbox").html($("#textbox").html()+'<img src="" width="120" id ='+idd+' onclick="Click('+idd+')">');
-				$('#' + idd).attr('src', 'img/character/' + data[i - 1]);
-			}
-		}
-	});
-    </script>
+    <br></br>
+    <div id = "charabox">
+    </div>
     <script type="text/javascript">
     var user = {userID:1,userspot1:0,userspot2:0};
+    var slotdata;
+    function fetchslot(){
     TeamPrinter.fetchslot(user, {
         callback: function(data) {
-        	for (var i = 1; i <= 3; ++i) {
-        		$('#' + i).attr('src', 'img/character/' + data[i - 1]);
+			if($('#textbox').length){
+				$("#textbox").empty();
+			}
+        	slotdata=data;
+        	for(var i = 0;i<data.length;++i){
+				$("#textbox").html($("#textbox").html()+'<img src="" width="120" id ='+data[i]+' onclick="Click('+data[i]+')">');
+				$('#' + data[i]).attr('src', 'img/character/img_'+data[i]+'.png');
+				}
         	}
-          //$('#error_message').text("");
-        },
-        errorHandler: updateErrorMessage
-      });
-    function updateErrorMessage(message, exception){
-      //$('#error_message').text(message);
-      //$('#csprinterReply').text("");
-    }
+      	}
+    );}
+    function characterfetch (){
+    TeamPrinter.characterfetch(user,{
+		callback:function(data2){
+			if($('#charabox').length){
+				$("#charabox").empty();
+			}
+			for(var i = 1;i<=data2.length;++i){
+				var id=i;
+				if(data2[i]>0&&i!=slotdata[0]&&i!=slotdata[1]&&i!=slotdata[2]){
+				$("#charabox").html($("#charabox").html()+'<img src="" width="120" id ='+id+' onclick="Click('+id+')">');
+				$('#' + id).attr('src', 'img/character/img_'+i+'.png');
+					}
+				}
+			}
+		}
+    );}
+    fetchslot();
+    characterfetch();
     </script>
   </body>
 </html>
