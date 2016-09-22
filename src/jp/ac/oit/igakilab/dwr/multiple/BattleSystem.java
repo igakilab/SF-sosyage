@@ -39,7 +39,7 @@ public class BattleSystem {
 	}
 
 	public List<String> getturn(int userID) throws InvalidValueException {
-
+		// turnをデータベースから取り出す
 		List<String> list = new ArrayList<>();
 		DBController reader = new DBController();
 
