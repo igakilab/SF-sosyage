@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script type="text/javascript">
+		
+	function readFunc() {
+		userID = $.cookie("userID");
+		myCounter = $.cookie("testCounter");
+		if (myCounter == null) {
+			myCounter = 0 ;
+			userID = 0;
+		}
+		
+		dispCountFunc();
+	}
+				
+	function dispCountFunc() {
+		$("div").text("いままでのクリック回数は"+myCounter+"回です。")
+	}
+
+	$(function(){
+		readFunc();
+				
+		$("#count").click(function(){
+			myCounter++;
+			userID++;
+			$.cookie("testCounter",myCounter);
+			$.cookie("userID",userID);
+			dispCountFunc();
+		})
+	});
+	
+</script>
+</head>
+<body>
+	<div></div>
+	<button id="count">カウントアップ</button>
+</body>
+</html>
