@@ -24,9 +24,13 @@
 <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" src="js/jquery.serialize.js"></script>
 <script type="text/javascript" src="dwr/interface/BattleSystem.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
 <script type="text/javascript" src="dwr/interface/TeamPrinter.js"></script>
 <script type="text/javascript">
-	var userID = 1;
+
+	
+	var userID = $.cookie("userID");
+
 	//userID,これはパスワードなどで判別できるようにする
 	var turncount;
 	//turnの変数
@@ -65,9 +69,12 @@
 	};
 	TeamPrinter.fetchslot(user, {
 		callback : function(partyimg) {
-			$("#partymember1").attr("src", "img/character/img_"+ partyimg[0]+".png");
-			$("#partymember2").attr("src", "img/character/img_" + partyimg[1]+".png");
-			$("#partymember3").attr("src", "img/character/img_" + partyimg[2]+".png");
+			$("#partymember1").attr("src",
+					"img/character/img_" + partyimg[0] + ".png");
+			$("#partymember2").attr("src",
+					"img/character/img_" + partyimg[1] + ".png");
+			$("#partymember3").attr("src",
+					"img/character/img_" + partyimg[2] + ".png");
 		}
 	});
 
@@ -89,18 +96,17 @@
 		if (turncount != 1) {
 			a -= mysumAT;
 			b -= enemyAT;
-			$('#log').val($('#log').val()+mysumAT+"のダメージを与えた\n");
+			$('#log').val($('#log').val() + mysumAT + "のダメージを与えた\n");
 
-			$('#log').val($('#log').val()+enemyAT+"のダメージを受けた\n");
+			$('#log').val($('#log').val() + enemyAT + "のダメージを受けた\n");
 
 		}
 
 		$('#EHP').text(a.toString() + "/" + enemyHP.toString());
 
-		$('.gauge_main').css('width',(100*a/enemyHP)+'%');
+		$('.gauge_main').css('width', (100 * a / enemyHP) + '%');
 		$('#MHP').text(b.toString() + "/" + mysumHP.toString());
-		
-		
+
 	}
 </script>
 </head>
