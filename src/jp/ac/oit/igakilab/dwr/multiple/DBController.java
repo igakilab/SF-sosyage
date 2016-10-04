@@ -13,8 +13,8 @@ public class DBController {
 	// スキーマ名、ユーザ名、パスワードはMySQLとの接続に必要なため
 	// ここで定数として定義しておく、使う時はここ変えてね
 	private static final String SCHEMA = "SFSDB";
-	private static final String USER = "akimoto";
-	private static final String PASSWORD = "aaaa";
+	private static final String USER = "root";
+	private static final String PASSWORD = "igakilabSF";
 	public void dowrite(String sql) {
 		// DBとのコネクション
 		Connection conn = null;
