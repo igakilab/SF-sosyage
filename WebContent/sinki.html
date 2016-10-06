@@ -1,0 +1,48 @@
+<html lang="ja">
+  <head>
+  <title>新規登録</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <script type="text/javascript" src="dwr/engine.js"></script>
+    <script type="text/javascript" src="dwr/util.js"></script>
+    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery.serialize.js"></script>
+    <script type="text/javascript" src="dwr/interface/LoginSystem.js"></script>
+    <script type="text/javascript">
+      function newusersystem(){
+    	  var id = $('#login [name=ID]').val();
+    	  var password = $('#login [name=パスワード]').val();
+    	  var user = {username:id,password:password};
+    	  LoginSystem.newuser(user,{
+          callback: function() {
+        	  alert('登録しました');
+        	  window.location.replace('login.html');
+
+          },
+          errorHandler: updateErrorMessage
+        });
+      }
+      function updateErrorMessage(message, exception){
+       alert(message);
+      }
+    </script>
+  </head>
+  <body>
+    <p>
+    登録情報
+    <br></br>
+    <form id="login">
+	ログインID:<input type="text" id = "id" name="ID"/>
+	<br></br>
+	password：<input type="text" id="password" name="パスワード" />
+	</form>
+	<br></br>
+	<input value="登録" type="button" onclick="newusersystem()" />
+	</p>
+
+	<br></br>
+	<p>
+    <a href="login.html">戻る</a>
+    </p>
+  </body>
+</html>
