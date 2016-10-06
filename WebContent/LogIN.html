@@ -15,20 +15,20 @@
     	  var user = {username:id,password:password};
     	  LoginSystem.login(user,{
           callback: function(data) {
-        	  alert(data);
+        	  alert(data+'ログインしました');
           },
 
           errorHandler: updateErrorMessage
         });
       }
       function updateErrorMessage(message, exception){
-        $('#error_message').text(message);
-        $('#csprinterReply').text("");
+        alert(message);
       }
     </script>
   </head>
   <body>
     <p>
+    ログイン
     <form id = "login">
 	ログインID:<input type="text" name="ID" id = "id" value=""/>
 	<br></br>

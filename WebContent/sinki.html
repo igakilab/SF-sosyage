@@ -16,13 +16,14 @@
     	  LoginSystem.newuser(user,{
           callback: function() {
         	  alert('登録しました');
+        	  window.location.replace('login.html');
+
           },
           errorHandler: updateErrorMessage
         });
       }
       function updateErrorMessage(message, exception){
-        $('#error_message').text(message);
-        $('#csprinterReply').text("");
+       alert(message);
       }
     </script>
   </head>
