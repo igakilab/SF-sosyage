@@ -7,6 +7,7 @@
     <script type="text/javascript" src="dwr/util.js"></script>
     <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="js/jquery.serialize.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
     <script type="text/javascript" src="dwr/interface/LoginSystem.js"></script>
     <script type="text/javascript">
       function loginsystem(){
@@ -15,7 +16,9 @@
     	  var user = {username:id,password:password};
     	  LoginSystem.login(user,{
           callback: function(data) {
-        	  alert(data+'ログインしました');
+        	  alert('ログインしました');
+        	  $.cookie("userID",data);
+        	  window.location.replace('index.html');
           },
 
           errorHandler: updateErrorMessage

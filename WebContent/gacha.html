@@ -7,10 +7,12 @@
     <script type="text/javascript" src="dwr/util.js"></script>
     <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="js/jquery.serialize.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
     <script type="text/javascript" src="dwr/interface/GachaSystem.js"></script>
     <script type="text/javascript">
+    var userID = $.cookie("userID");
       function gacha(){
-    	  var user = {userID:1,userspot1:0,userspot2:0};
+    	  var user = {userID:userID,userspot1:0,userspot2:0};
     	  GachaSystem.gachakekka(user,{
           callback: function(data) {
         	  $("#"+1).attr('src', 'img/character/img_' + data + ".png");
