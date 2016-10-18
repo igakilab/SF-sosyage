@@ -27,12 +27,13 @@
 <script type="text/javascript" src="js/jquery.cookie.js"></script>
 <script type="text/javascript" src="dwr/interface/TeamPrinter.js"></script>
 <script type="text/javascript">
-
-	
 	var userID = $.cookie("userID");
+	var akt1 = 1;
+	var akt2 = 1;
+	var akt3 = 1;
 
 	//userID,これはパスワードなどで判別できるようにする
-	var turncount =  0;
+	var turncount = 0;
 	//turnの変数
 	var enemyHP;
 	//敵の体力
@@ -132,6 +133,7 @@
 	<img id="partymember1" src="" width="160">
 	<img id="partymember2" src="" width="160">
 	<img id="partymember3" src="" width="160">
+	<input value="攻撃" type="button" onclick="aktchange()" />
 	<br> mysumHP
 	<span id="MHP"></span>
 
