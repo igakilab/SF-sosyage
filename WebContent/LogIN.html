@@ -18,7 +18,7 @@
           callback: function(data) {
         	  alert('ログインしました');
         	  $.cookie("userID",data);
-        	  window.location.replace('index.html');
+        	  window.location.href = 'index.html';
           },
 
           errorHandler: updateErrorMessage

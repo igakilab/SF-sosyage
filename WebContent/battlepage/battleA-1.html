@@ -46,9 +46,6 @@
 	//敵の現体力
 	var b;
 	//自分のパーティーの現体力
-	var c1 = 1;
-	var c2 = 2;
-	var c3 = 3;
 
 	BattleSystem.getturn(userID, {
 		callback : function(turndata) {
@@ -96,12 +93,6 @@
 	function turnup() {
 		turncount++;
 		$('#turn').text(turncount.toString());
-		var battledata = {userID:userID,c1:c1,c2:c2,c3:c3}
-		  BattleSystem.battle(battledata,{
-	          callback: function(data) {
-	        	  alert('data[0]');
-	          },
-	        });
 		if (turncount != 1) {
 			a -= mysumAT;
 			b -= enemyAT;
