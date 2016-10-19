@@ -1,7 +1,7 @@
 package jp.ac.oit.igakilab.dwr.multiple;
 
 public class BattleData {
-	    private String userID = "";
+	    private int userID = 99 ;
 	    private int c1 = 1;
 	    private int c2 = 1;
 	    private int c3 = 1;
@@ -9,11 +9,11 @@ public class BattleData {
 	    public BattleData(){
 	    }
 
-	    public void setusername(String userID){
+	    public void setuserID(int userID){
 	        this.userID = userID;
 	    }
 
-	    public String getuserID(){
+	    public int getuserID(){
 	        return userID;
 	    }
 
@@ -21,7 +21,7 @@ public class BattleData {
 			return c1;
 		}
 
-		public void set1(int c1) {
+		public void setc1(int c1) {
 			this.c1 = c1;
 		}
 		public int getc2() {
@@ -35,8 +35,8 @@ public class BattleData {
 			return c3;
 		}
 
-		public void set3(int c3) {
-			this.c1 = c3;
+		public void setc3(int c3) {
+			this.c3 = c3;
 		}
 
 }

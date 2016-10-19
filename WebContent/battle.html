@@ -96,12 +96,6 @@
 	function turnup() {
 		turncount++;
 		$('#turn').text(turncount.toString());
-		var battledata = {userID:userID,c1:c1,c2:c2,c3:c3}
-		  BattleSystem.battle(battledata,{
-	          callback: function(data) {
-	        	  alert('data[0]');
-	          },
-	        });
 		if (turncount != 1) {
 			a -= mysumAT;
 			b -= enemyAT;
@@ -116,6 +110,19 @@
 		$('.gauge_main').css('width', (100 * a / enemyHP) + '%');
 		$('#MHP').text(b.toString() + "/" + mysumHP.toString());
 
+	}
+
+	function attack(){
+		var battledata = {userID:userID,c1:1,c2:1,c3:1}
+		  BattleSystem.battle(battledata,{
+	          callback: function(data) {
+	        	  mysumAT = data[0];
+	          },
+	          (function() {
+					turnup();
+				})();
+	  		}
+	        });
 	}
 </script>
 </head>
@@ -136,7 +143,7 @@
 	<img id="enemyimg" src="">
 	<textarea id="log" name="log" cols="50" rows="10" readonly></textarea>
 	<br>
-	<input value="たたかう" type="button" onclick="turnup()" />
+	<input value="たたかう" type="button" onclick="attack()" />
 	<br>
 	<img id="partymember1" src="" width="160">
 	<img id="partymember2" src="" width="160">
