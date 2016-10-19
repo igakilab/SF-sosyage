@@ -32,6 +32,14 @@
 			$.cookie("userID",userID);
 			dispCountFunc();
 		})
+		
+		$("#count1").click(function(){
+			myCounter=0;
+			userID=0;
+			$.cookie("testCounter",myCounter);
+			$.cookie("userID",userID);
+			dispCountFunc();
+		})
 	});
 	
 </script>
@@ -39,5 +47,7 @@
 <body>
 	<div></div>
 	<button id="count">カウントアップ</button>
+	<button id="count1">カウントリセット</button>
+	
 </body>
 </html>
