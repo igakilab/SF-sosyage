@@ -27,6 +27,7 @@
 <script type="text/javascript" src="js/jquery.cookie.js"></script>
 <script type="text/javascript" src="dwr/interface/TeamPrinter.js"></script>
 <script type="text/javascript">
+
 	var userID = $.cookie("userID");
 	var akt1 = 1;
 	var akt2 = 1;
@@ -109,6 +110,16 @@
 		$('#MHP').text(b.toString() + "/" + mysumHP.toString());
 
 	}
+	/*function atkchange1(){
+		akt1 = 1;
+		$.cookie("akt1",akt1);
+	}
+	function atkchange2(){
+		akt1 = 2;
+		$.cookie("akt1",akt1);
+	}
+*/
+	}
 </script>
 </head>
 <body>
@@ -133,7 +144,13 @@
 	<img id="partymember1" src="" width="160">
 	<img id="partymember2" src="" width="160">
 	<img id="partymember3" src="" width="160">
+	<br>
+	<input value="攻撃" type="button" onclick="aktchange1()" />
+	<input value="必殺" type="button" onclick="aktchange2()" />
 	<input value="攻撃" type="button" onclick="aktchange()" />
+	<input value="必殺" type="button" onclick="aktchange()" />
+	<input value="攻撃" type="button" onclick="aktchange()" />
+	<input value="必殺" type="button" onclick="aktchange()" />
 	<br> mysumHP
 	<span id="MHP"></span>
 
@@ -143,3 +160,33 @@
 	</script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
