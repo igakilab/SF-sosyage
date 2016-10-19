@@ -48,4 +48,41 @@ public class BattleSystem {
 
 		return list;
 	}
+
+	public List<String> battle(BattleData battledata){
+		//userIDと味方の行動の読み込み//
+		int ID = battledata.getuserID();
+		int c1 = battledata.getc1();
+		int c2 = battledata.getc2();
+		int c3 = battledata.getc3();
+		double atk = 0;
+		String[] s = null;
+		String[] result = null;
+		List<String> list = new ArrayList<>();
+		DBController reader = new DBController();
+
+			//slot1のキャラの行動判定//
+		if(c1 == 1){
+			s = reader.doget("SELECT slot1 FROM user WHERE userID = " + ID );
+			result = reader.doget("SELECT atk FROM sfchara WHERE charaID = " + s[0]);
+			atk = atk + Integer.valueOf(result[0]);
+		}
+			//slot2のキャラの行動判定//
+		if(c2 == 1){
+			s = reader.doget("SELECT slot2 FROM user WHERE userID = " + ID );
+			result = reader.doget("SELECT atk FROM sfchara WHERE charaID = " + s[0]);
+			atk = atk + Integer.valueOf(result[0]);
+		}
+
+		//slot3のキャラの行動判定//
+		if(c3 ==1){
+			s = reader.doget("SELECT slot3 FROM user WHERE userID = " + ID );
+			result = reader.doget("SELECT atk FROM sfchara WHERE charaID = " + s[0]);
+			atk = atk + Integer.valueOf(result[0]);
+		}
+		atk = atk*1.5;
+		list.add(String.valueOf(atk));
+		return list;
+
+	}
 }
