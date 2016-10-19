@@ -46,9 +46,6 @@
 	//敵の現体力
 	var b;
 	//自分のパーティーの現体力
-	var c1 = 1;
-	var c2 = 2;
-	var c3 = 3;
 
 	BattleSystem.getturn(userID, {
 		callback : function(turndata) {
@@ -99,39 +96,17 @@
 		if (turncount != 1) {
 			a -= mysumAT;
 			b -= enemyAT;
-
-			if(a<=0){
-				alert('倒した!');
-				$.cookie("turn",turncount);
-				window.location.replace('result.html');
-
-				}
 			$('#log').val($('#log').val() + mysumAT + "のダメージを与えた\n");
 
 			$('#log').val($('#log').val() + enemyAT + "のダメージを受けた\n");
 
 		}
 
-
 		$('#EHP').text(a.toString() + "/" + enemyHP.toString());
 
 		$('.gauge_main').css('width', (100 * a / enemyHP) + '%');
 		$('#MHP').text(b.toString() + "/" + mysumHP.toString());
 
-	}
-
-	function attack(){
-		var battledata = {userID:userID,c1:1,c2:1,c3:1}
-		  BattleSystem.battle(battledata,{
-	          callback: function(data) {
-	        	  mysumAT = data[0];
-
-	        		(function() {
-	    				turnup();
-	    			})();
-	          },
-
-	  		});
 	}
 </script>
 </head>
@@ -152,7 +127,7 @@
 	<img id="enemyimg" src="">
 	<textarea id="log" name="log" cols="50" rows="10" readonly></textarea>
 	<br>
-	<input value="たたかう" type="button" onclick="attack()" />
+	<input value="たたかう" type="button" onclick="turnup()" />
 	<br>
 	<img id="partymember1" src="" width="160">
 	<img id="partymember2" src="" width="160">
