@@ -30,9 +30,9 @@
 
 
 	var userID = $.cookie("userID");
-	var akt1 = 1;
-	var akt2 = 1;
-	var akt3 = 1;
+	var akt1 = $.cookie("akt1");
+	var akt2 = $.cookie("akt2");
+	var akt3 = $.cookie("akt3");
 
 	//userID,これはパスワードなどで判別できるようにする
 	var turncount = 0;
@@ -90,7 +90,9 @@
 
 			(function() {
 				turnup();
+				colorchange();
 			})();
+			
 		}
 	});
 
@@ -124,28 +126,64 @@
 	function aktchange1(){
 		akt1 = 1;
 		$.cookie("akt1",akt1);
+		$("#botton1").css("color","#ff0000");
+		$("#botton2").css("color","#000000");
 	}
 	function aktchange2(){
 		akt1 = 2;
 		$.cookie("akt1",akt1);
+		$("#botton2").css("color","#ff0000");
+		$("#botton1").css("color","#000000");
 	}
 	function aktchange3(){
 		akt2 = 1;
 		$.cookie("akt2",akt2);
+		$("#botton3").css("color","#ff0000");
+		$("#botton4").css("color","#000000");
 	}
 	function aktchange4(){
 		akt2 = 2;
 		$.cookie("akt2",akt2);
+		$("#botton4").css("color","#ff0000");
+		$("#botton3").css("color","#000000");
 	}
 	function aktchange5(){
 		akt3 = 1;
 		$.cookie("akt3",akt3);
+		$("#botton5").css("color","#ff0000");
+		$("#botton6").css("color","#000000");
 	}
 	function aktchange6(){
 		akt3 = 2;
 		$.cookie("akt3",akt3);
+		$("#botton6").css("color","#ff0000");
+		$("#botton5").css("color","#000000");
 	}
-
+function colorchange(){
+	if(akt1==1){
+		$("#botton1").css("color","#ff0000");
+		$("#botton2").css("color","#000000");
+	}else{
+		$("#botton2").css("color","#ff0000");
+		$("#botton1").css("color","#000000");
+	}
+	if(akt2==1){
+		$("#botton3").css("color","#ff0000");
+		$("#botton4").css("color","#000000");
+	}else{
+		$("#botton4").css("color","#ff0000");
+		$("#botton3").css("color","#000000");
+	}
+	if(akt3==1){
+		$("#botton5").css("color","#ff0000");
+		$("#botton6").css("color","#000000");
+	}else{
+		$("#botton6").css("color","#ff0000");
+		$("#botton5").css("color","#000000");
+	}
+	
+	
+}
 
 
 	function attack(){
@@ -187,12 +225,12 @@
 	<img id="partymember2" src="" width="160">
 	<img id="partymember3" src="" width="160">
 	<br>
-	<input value="攻撃" type="button" onclick="aktchange1()" />
-	<input value="必殺" type="button" onclick="aktchange2()" />
-	<input value="攻撃" type="button" onclick="aktchange3()" />
-	<input value="必殺" type="button" onclick="aktchange4()" />
-	<input value="攻撃" type="button" onclick="aktchange5()" />
-	<input value="必殺" type="button" onclick="aktchange6()" />
+	<input id="botton1" value="攻撃" type="button" onclick="aktchange1()" />
+	<input id="botton2" value="必殺" type="button" onclick="aktchange2()" />
+	<input id="botton3" value="攻撃" type="button" onclick="aktchange3()" />
+	<input id="botton4" value="必殺" type="button" onclick="aktchange4()" />
+	<input id="botton5" value="攻撃" type="button" onclick="aktchange5()" />
+	<input id="botton6" value="必殺" type="button" onclick="aktchange6()" />
 	<br> mysumHP
 	<span id="MHP"></span>
 
