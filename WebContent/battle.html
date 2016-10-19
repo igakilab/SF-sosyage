@@ -29,7 +29,8 @@
 <script type="text/javascript">
 
 
-	var userID = $.cookie("userID");
+	var userID = 1
+		//$.cookie("userID");
 
 	//userID,これはパスワードなどで判別できるようにする
 	var turncount =  0;
@@ -118,11 +119,8 @@
 	          callback: function(data) {
 	        	  mysumAT = data[0];
 	          },
-	          (function() {
-					turnup();
-				})();
-	  		}
-	        });
+
+	  		});
 	}
 </script>
 </head>
