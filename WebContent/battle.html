@@ -29,8 +29,7 @@
 <script type="text/javascript">
 
 
-	var userID = 1
-		//$.cookie("userID");
+	var userID = $.cookie("userID");
 
 	//userID,これはパスワードなどで判別できるようにする
 	var turncount =  0;
@@ -100,11 +99,19 @@
 		if (turncount != 1) {
 			a -= mysumAT;
 			b -= enemyAT;
+
+			if(a<=0){
+				alert('倒した!');
+				$.cookie("turn",turncount);
+				window.location.replace('result.html');
+
+				}
 			$('#log').val($('#log').val() + mysumAT + "のダメージを与えた\n");
 
 			$('#log').val($('#log').val() + enemyAT + "のダメージを受けた\n");
 
 		}
+
 
 		$('#EHP').text(a.toString() + "/" + enemyHP.toString());
 
@@ -118,6 +125,10 @@
 		  BattleSystem.battle(battledata,{
 	          callback: function(data) {
 	        	  mysumAT = data[0];
+
+	        		(function() {
+	    				turnup();
+	    			})();
 	          },
 
 	  		});
