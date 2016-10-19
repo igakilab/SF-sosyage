@@ -110,16 +110,32 @@
 		$('#MHP').text(b.toString() + "/" + mysumHP.toString());
 
 	}
-	/*function atkchange1(){
+	function aktchange1(){
 		akt1 = 1;
 		$.cookie("akt1",akt1);
 	}
-	function atkchange2(){
+	function aktchange2(){
 		akt1 = 2;
 		$.cookie("akt1",akt1);
 	}
-*/
+	function aktchange3(){
+		akt2 = 1;
+		$.cookie("akt2",akt2);
 	}
+	function aktchange4(){
+		akt2 = 2;
+		$.cookie("akt2",akt2);
+	}
+	function aktchange5(){
+		akt3 = 1;
+		$.cookie("akt3",akt3);
+	}
+	function aktchange6(){
+		akt3 = 2;
+		$.cookie("akt3",akt3);
+	}
+
+	
 </script>
 </head>
 <body>
@@ -147,10 +163,10 @@
 	<br>
 	<input value="攻撃" type="button" onclick="aktchange1()" />
 	<input value="必殺" type="button" onclick="aktchange2()" />
-	<input value="攻撃" type="button" onclick="aktchange()" />
-	<input value="必殺" type="button" onclick="aktchange()" />
-	<input value="攻撃" type="button" onclick="aktchange()" />
-	<input value="必殺" type="button" onclick="aktchange()" />
+	<input value="攻撃" type="button" onclick="aktchange3()" />
+	<input value="必殺" type="button" onclick="aktchange4()" />
+	<input value="攻撃" type="button" onclick="aktchange5()" />
+	<input value="必殺" type="button" onclick="aktchange6()" />
 	<br> mysumHP
 	<span id="MHP"></span>
 
