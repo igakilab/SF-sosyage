@@ -5,6 +5,7 @@ public class BattleData {
 	    private int c1 = 1;
 	    private int c2 = 1;
 	    private int c3 = 1;
+	    private int ene = 0;
 
 	    public BattleData(){
 	    }
@@ -37,6 +38,14 @@ public class BattleData {
 
 		public void setc3(int c3) {
 			this.c3 = c3;
+		}
+
+		public int getene(){
+			return ene;
+		}
+
+		public void setene(int ene){
+			this.ene = ene;
 		}
 
 }

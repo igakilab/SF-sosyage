@@ -57,7 +57,7 @@
 	//敵の現体力
 	var b;
 	//自分のパーティーの現体力
-	
+
 
 	BattleSystem.getturn(userID, {
 		callback : function(turndata) {
@@ -194,7 +194,7 @@ function colorchange(){
 
 
 	function attack(){
-		var battledata = {userID:userID,c1:akt1,c2:akt2,c3:akt3}
+		var battledata = {userID:userID,c1:akt1,c2:akt2,c3:akt3,ene:1}
 		  BattleSystem.battle(battledata,{
 	          callback: function(data) {
 	        	  mysumAT = data[0];
@@ -254,6 +254,7 @@ function colorchange(){
 	<script type="text/javascript">
 
 	</script>
+
 </body>
 </html>
 
