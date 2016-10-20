@@ -18,6 +18,12 @@
 		to(#0FF));
 	height: 22px;
 }
+.gauge_wrap .gauge_main2 {
+	background: -moz-linear-gradient(top, #9FF, #0FF);
+	background: -webkit-gradient(linear, left top, left bottom, from(#9FF),
+		to(#0FF));
+	height: 22px;
+}
 </style>
 <script type="text/javascript" src="dwr/engine.js"></script>
 <script type="text/javascript" src="dwr/util.js"></script>
@@ -33,6 +39,8 @@
 	var akt1 = $.cookie("akt1");
 	var akt2 = $.cookie("akt2");
 	var akt3 = $.cookie("akt3");
+	
+	
 
 	//userID,これはパスワードなどで判別できるようにする
 	var turncount = 0;
@@ -90,7 +98,11 @@
 
 			(function() {
 				turnup();
-				colorchange();
+				
+				aktchange1();
+				aktchange3();
+				aktchange5();
+			
 			})();
 			
 		}
@@ -120,44 +132,39 @@
 
 		$('.gauge_main').css('width', (100 * a / enemyHP) + '%');
 		$('#MHP').text(b.toString() + "/" + mysumHP.toString());
+		$('.gauge_main2').css('width', (100 * b / mysumHP) + '%');
 
 	}
 
 	function aktchange1(){
 		akt1 = 1;
 		$.cookie("akt1",akt1);
-		$("#botton1").css("color","#ff0000");
-		$("#botton2").css("color","#000000");
+		colorchange();
 	}
 	function aktchange2(){
 		akt1 = 2;
 		$.cookie("akt1",akt1);
-		$("#botton2").css("color","#ff0000");
-		$("#botton1").css("color","#000000");
+		colorchange();
 	}
 	function aktchange3(){
 		akt2 = 1;
 		$.cookie("akt2",akt2);
-		$("#botton3").css("color","#ff0000");
-		$("#botton4").css("color","#000000");
+		colorchange();
 	}
 	function aktchange4(){
 		akt2 = 2;
 		$.cookie("akt2",akt2);
-		$("#botton4").css("color","#ff0000");
-		$("#botton3").css("color","#000000");
+		colorchange();
 	}
 	function aktchange5(){
 		akt3 = 1;
 		$.cookie("akt3",akt3);
-		$("#botton5").css("color","#ff0000");
-		$("#botton6").css("color","#000000");
+		colorchange();
 	}
 	function aktchange6(){
 		akt3 = 2;
 		$.cookie("akt3",akt3);
-		$("#botton6").css("color","#ff0000");
-		$("#botton5").css("color","#000000");
+		colorchange();
 	}
 function colorchange(){
 	if(akt1==1){
@@ -231,8 +238,17 @@ function colorchange(){
 	<input id="botton4" value="必殺" type="button" onclick="aktchange4()" />
 	<input id="botton5" value="攻撃" type="button" onclick="aktchange5()" />
 	<input id="botton6" value="必殺" type="button" onclick="aktchange6()" />
+	<br>
+	<ul class="gauge_wrap" style="list-style-type: none">
+		<li>
+			<div>
+				<div class="gauge_main2" style="width: 80%;"></div>
+			</div>
+		</li>
+	</ul>
 	<br> mysumHP
 	<span id="MHP"></span>
+	
 
 
 	<script type="text/javascript">
