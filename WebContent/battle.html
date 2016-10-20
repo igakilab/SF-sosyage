@@ -30,9 +30,12 @@
 
 
 	var userID = $.cookie("userID");
+	var akt1 = 1;
+	var akt2 = 1;
+	var akt3 = 1;
 
 	//userID,これはパスワードなどで判別できるようにする
-	var turncount =  0;
+	var turncount = 0;
 	//turnの変数
 	var enemyHP;
 	//敵の体力
@@ -46,9 +49,7 @@
 	//敵の現体力
 	var b;
 	//自分のパーティーの現体力
-	var c1 = 1;
-	var c2 = 2;
-	var c3 = 3;
+	
 
 	BattleSystem.getturn(userID, {
 		callback : function(turndata) {
@@ -120,8 +121,35 @@
 
 	}
 
+	function aktchange1(){
+		akt1 = 1;
+		$.cookie("akt1",akt1);
+	}
+	function aktchange2(){
+		akt1 = 2;
+		$.cookie("akt1",akt1);
+	}
+	function aktchange3(){
+		akt2 = 1;
+		$.cookie("akt2",akt2);
+	}
+	function aktchange4(){
+		akt2 = 2;
+		$.cookie("akt2",akt2);
+	}
+	function aktchange5(){
+		akt3 = 1;
+		$.cookie("akt3",akt3);
+	}
+	function aktchange6(){
+		akt3 = 2;
+		$.cookie("akt3",akt3);
+	}
+
+
+
 	function attack(){
-		var battledata = {userID:userID,c1:1,c2:1,c3:1}
+		var battledata = {userID:userID,c1:akt1,c2:akt2,c3:akt3}
 		  BattleSystem.battle(battledata,{
 	          callback: function(data) {
 	        	  mysumAT = data[0];
@@ -133,6 +161,7 @@
 
 	  		});
 	}
+
 </script>
 </head>
 <body>
@@ -157,6 +186,13 @@
 	<img id="partymember1" src="" width="160">
 	<img id="partymember2" src="" width="160">
 	<img id="partymember3" src="" width="160">
+	<br>
+	<input value="攻撃" type="button" onclick="aktchange1()" />
+	<input value="必殺" type="button" onclick="aktchange2()" />
+	<input value="攻撃" type="button" onclick="aktchange3()" />
+	<input value="必殺" type="button" onclick="aktchange4()" />
+	<input value="攻撃" type="button" onclick="aktchange5()" />
+	<input value="必殺" type="button" onclick="aktchange6()" />
 	<br> mysumHP
 	<span id="MHP"></span>
 
@@ -166,3 +202,33 @@
 	</script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
