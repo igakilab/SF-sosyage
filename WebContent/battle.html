@@ -39,8 +39,8 @@
 	var akt1 = $.cookie("akt1");
 	var akt2 = $.cookie("akt2");
 	var akt3 = $.cookie("akt3");
-	
-	
+
+
 
 	//userID,これはパスワードなどで判別できるようにする
 	var turncount = 0;
@@ -98,38 +98,38 @@
 
 			(function() {
 				turnup();
-				
+
 				aktchange1();
 				aktchange3();
 				aktchange5();
-			
+
 			})();
-			
+
 		}
 	});
 
 	function turnup() {
-		turncount++;
 		$('#turn').text(turncount.toString());
-		if (turncount != 1) {
+		if (turncount != 0) {
 			a -= mysumAT;
-			b -= enemyAT;
-
-			if(a<=0){
-				alert('倒した!');
-				$.cookie("turn",turncount);
-				window.location.replace('result.html');
-
-				}
 			$('#log').val($('#log').val() + mysumAT + "のダメージを与えた\n");
 
+			if(a<=0){
+				$('#EHP').text(a.toString() + "/" + enemyHP.toString());
+				$('.gauge_main').css('width', (100 * a / enemyHP) + '%');
+				$.cookie("turn",turncount);
+				alert('倒した!');
+				window.location.replace('result.html');
+				return ;
+				}
+			b -= enemyAT;
 			$('#log').val($('#log').val() + enemyAT + "のダメージを受けた\n");
 
 		}
 
+		turncount++;
 
 		$('#EHP').text(a.toString() + "/" + enemyHP.toString());
-
 		$('.gauge_main').css('width', (100 * a / enemyHP) + '%');
 		$('#MHP').text(b.toString() + "/" + mysumHP.toString());
 		$('.gauge_main2').css('width', (100 * b / mysumHP) + '%');
@@ -188,8 +188,8 @@ function colorchange(){
 		$("#botton6").css("color","#ff0000");
 		$("#botton5").css("color","#000000");
 	}
-	
-	
+
+
 }
 
 
@@ -248,7 +248,7 @@ function colorchange(){
 	</ul>
 	<br> mysumHP
 	<span id="MHP"></span>
-	
+
 
 
 	<script type="text/javascript">
