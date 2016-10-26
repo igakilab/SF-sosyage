@@ -34,7 +34,6 @@
 <script type="text/javascript" src="dwr/interface/TeamPrinter.js"></script>
 <script type="text/javascript">
 
-
 	var userID = $.cookie("userID");
 	var akt1 = $.cookie("akt1");
 	var akt2 = $.cookie("akt2");
@@ -57,7 +56,7 @@
 	//敵の現体力
 	var b;
 	//自分のパーティーの現体力
-
+	//敵のIDを格納
 
 	BattleSystem.getturn(userID, {
 		callback : function(turndata) {
@@ -65,15 +64,20 @@
 		}
 	});
 
-	BattleSystem.getenemy(1, {
-		//1とはステージを表している
-		callback : function(enedata) {
-			enemyHP = parseInt(enedata[0]);
-			enemyAT = parseInt(enedata[1]);
-			a = enemyHP;
-			$("#enemyimg").attr("src", "img/" + enedata[2]);
+	BattleSystem.geteneID(userID,{
+		callback : function(data){
+			BattleSystem.getenemy(data, {
+				//1とはステージを表している
+				callback : function(enedata) {
+					enemyHP = parseInt(enedata[0]);
+					enemyAT = parseInt(enedata[1]);
+					a = enemyHP;
+					$("#enemyimg").attr("src", "img/enemy/" + enedata[2]);
+				}
+			});
 		}
 	});
+
 	var user = {
 		userID : userID,
 		userspot1 : 0,
@@ -90,7 +94,7 @@
 		}
 	});
 
-	BattleSystem.getatkhp(1, {
+	BattleSystem.getatkhp(userID, {
 		callback : function(data) {
 			mysumAT = parseInt(data[0]);
 			mysumHP = parseInt(data[1]);
@@ -118,6 +122,7 @@
 				$('#EHP').text(a.toString() + "/" + enemyHP.toString());
 				$('.gauge_main').css('width', (100 * a / enemyHP) + '%');
 				$.cookie("turn",turncount);
+
 				alert('倒した!');
 				window.location.replace('result.html');
 				return ;

@@ -109,4 +109,10 @@ public class BattleSystem {
 
 		return 1;
 	}
+
+	public int geteneID(int userID){
+		DBController reader = new DBController();
+		String[] result = reader.doget("SELECT nextenemy FROM user WHERE "+ userID );
+		return Integer.valueOf(result[0]);
+	}
 }

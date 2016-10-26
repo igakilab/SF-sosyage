@@ -11,10 +11,12 @@
     <script type="text/javascript" src="js/jquery.cookie.js"></script>
     <script type="text/javascript">
     	var turn = $.cookie("turn");
+    	var userID = $.cookie("userID");
     	var score = 0;
-    	Score.scorecount(turn,{
+    	Score.scorecount(turn,userID,{
           callback: function(data) {
         	  $("div").text("今回のバトルのスコアは「"+data+"」です。");
+        	  $('#ticket').text(data);
           },
         });
     </script>
@@ -22,6 +24,7 @@
   <body>
     <p>
     <div></div>
+    今回獲得したガチャは<span id= ticket></span>回です
 	<p>
     <a href="index.html">戻る</a>
     </p>
