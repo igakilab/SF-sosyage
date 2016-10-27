@@ -8,7 +8,7 @@
 	background: -webkit-gradient(linear, left top, left bottom, from(#555),
 		to(#222));
 	border: solid 5px #000;
-	width: 300px;
+	width: 500px;
 	/* height: 32px;*/
 }
 
@@ -18,11 +18,30 @@
 		to(#0FF));
 	height: 22px;
 }
+
 .gauge_wrap .gauge_main2 {
 	background: -moz-linear-gradient(top, #9FF, #0FF);
 	background: -webkit-gradient(linear, left top, left bottom, from(#ADFF2F),
 		to(#7FFF00));
 	height: 22px;
+}
+
+#center02 {
+	position: relative; /* 絶対配置の基準点 */
+	width: 100%; /* 600px以下は幅いっぱいに広げる */
+	max-width: 600px; /* 最大幅の指定 */
+	height: 300px; /* 高さの指定 */
+	margin: 0 auto; /* ブロック要素の中央揃え */
+	text-align: center; /* インライン要素の中央揃え */
+	background: #fff; /* 背景色 */
+}
+
+#center02 .inner {
+	position: absolute; /* 絶対配置 */
+	top: 0%; /* 上から半分 */
+	left: 50%; /* 左から半分 */
+	width: 100%; /* 大枠と同じ幅に */
+	margin: -1.5em 0 0 -50%; /* 要素の大きさの半分引く */
 }
 </style>
 <script type="text/javascript" src="dwr/engine.js"></script>
@@ -33,14 +52,10 @@
 <script type="text/javascript" src="js/jquery.cookie.js"></script>
 <script type="text/javascript" src="dwr/interface/TeamPrinter.js"></script>
 <script type="text/javascript">
-
-
 	var userID = $.cookie("userID");
 	var akt1 = $.cookie("akt1");
 	var akt2 = $.cookie("akt2");
 	var akt3 = $.cookie("akt3");
-
-
 
 	//userID,これはパスワードなどで判別できるようにする
 	var turncount = 0;
@@ -57,7 +72,6 @@
 	//敵の現体力
 	var b;
 	//自分のパーティーの現体力
-
 
 	BattleSystem.getturn(userID, {
 		callback : function(turndata) {
@@ -114,14 +128,14 @@
 			a -= mysumAT;
 			$('#log').val($('#log').val() + mysumAT + "のダメージを与えた\n");
 
-			if(a<=0){
+			if (a <= 0) {
 				$('#EHP').text(a.toString() + "/" + enemyHP.toString());
 				$('.gauge_main').css('width', (100 * a / enemyHP) + '%');
-				$.cookie("turn",turncount);
+				$.cookie("turn", turncount);
 				alert('倒した!');
 				window.location.replace('result.html');
-				return ;
-				}
+				return;
+			}
 			b -= enemyAT;
 			$('#log').val($('#log').val() + enemyAT + "のダメージを受けた\n");
 
@@ -136,126 +150,138 @@
 
 	}
 
-	function aktchange1(){
+	function aktchange1() {
 		akt1 = 1;
-		$.cookie("akt1",akt1);
+		$.cookie("akt1", akt1);
 		colorchange();
 	}
-	function aktchange2(){
+	function aktchange2() {
 		akt1 = 2;
-		$.cookie("akt1",akt1);
+		$.cookie("akt1", akt1);
 		colorchange();
 	}
-	function aktchange3(){
+	function aktchange3() {
 		akt2 = 1;
-		$.cookie("akt2",akt2);
+		$.cookie("akt2", akt2);
 		colorchange();
 	}
-	function aktchange4(){
+	function aktchange4() {
 		akt2 = 2;
-		$.cookie("akt2",akt2);
+		$.cookie("akt2", akt2);
 		colorchange();
 	}
-	function aktchange5(){
+	function aktchange5() {
 		akt3 = 1;
-		$.cookie("akt3",akt3);
+		$.cookie("akt3", akt3);
 		colorchange();
 	}
-	function aktchange6(){
+	function aktchange6() {
 		akt3 = 2;
-		$.cookie("akt3",akt3);
+		$.cookie("akt3", akt3);
 		colorchange();
 	}
-function colorchange(){
-	if(akt1==1){
-		$("#botton1").css("color","#ff0000");
-		$("#botton2").css("color","#000000");
-	}else{
-		$("#botton2").css("color","#ff0000");
-		$("#botton1").css("color","#000000");
-	}
-	if(akt2==1){
-		$("#botton3").css("color","#ff0000");
-		$("#botton4").css("color","#000000");
-	}else{
-		$("#botton4").css("color","#ff0000");
-		$("#botton3").css("color","#000000");
-	}
-	if(akt3==1){
-		$("#botton5").css("color","#ff0000");
-		$("#botton6").css("color","#000000");
-	}else{
-		$("#botton6").css("color","#ff0000");
-		$("#botton5").css("color","#000000");
-	}
+	function colorchange() {
+		if (akt1 == 1) {
+			$("#botton1").css("color", "#ff0000");
+			$("#botton2").css("color", "#000000");
+		} else {
+			$("#botton2").css("color", "#ff0000");
+			$("#botton1").css("color", "#000000");
+		}
+		if (akt2 == 1) {
+			$("#botton3").css("color", "#ff0000");
+			$("#botton4").css("color", "#000000");
+		} else {
+			$("#botton4").css("color", "#ff0000");
+			$("#botton3").css("color", "#000000");
+		}
+		if (akt3 == 1) {
+			$("#botton5").css("color", "#ff0000");
+			$("#botton6").css("color", "#000000");
+		} else {
+			$("#botton6").css("color", "#ff0000");
+			$("#botton5").css("color", "#000000");
+		}
 
-
-}
-
-
-	function attack(){
-		var battledata = {userID:userID,c1:akt1,c2:akt2,c3:akt3,ene:1}
-		  BattleSystem.battle(battledata,{
-	          callback: function(data) {
-	        	  mysumAT = data[0];
-
-	        		(function() {
-	    				turnup();
-	    			})();
-	          },
-
-	  		});
 	}
 
+	function attack() {
+		var battledata = {
+			userID : userID,
+			c1 : akt1,
+			c2 : akt2,
+			c3 : akt3,
+			ene : 1
+		}
+		BattleSystem.battle(battledata, {
+			callback : function(data) {
+				mysumAT = data[0];
+
+				(function() {
+					turnup();
+				})();
+			},
+
+		});
+	}
 </script>
 </head>
+
+
 <body>
+	<div id="center02">
+		<div class="inner">
 
-	<ul class="gauge_wrap" style="list-style-type: none">
-		<li>
-			<div>
-				<div class="gauge_main" style="width: 80%;"></div>
-			</div>
-		</li>
-	</ul>
-
+			<ul class="gauge_wrap" style="list-style-type: none">
+				<li>
+					<div>
+						<div class="gauge_main" style="width: 80%;"></div>
+					</div>
+				</li>
+			</ul>
+	
 
 	turn
-	<span id="turn"></span> enemyHP
-	<span id="EHP"></span>
-	<img id="enemyimg" src="">
-	<textarea id="log" name="log" cols="50" rows="10" readonly></textarea>
-	<br>
-	<input value="たたかう" type="button" onclick="attack()" />
-	<br>
-	<img id="partymember1" src="" width="160">
-	<img id="partymember2" src="" width="160">
-	<img id="partymember3" src="" width="160">
-	<br>
-	<input id="botton1" value="攻撃" type="button" onclick="aktchange1()" />
-	<input id="botton2" value="必殺" type="button" onclick="aktchange2()" />
-	<input id="botton3" value="攻撃" type="button" onclick="aktchange3()" />
-	<input id="botton4" value="必殺" type="button" onclick="aktchange4()" />
-	<input id="botton5" value="攻撃" type="button" onclick="aktchange5()" />
-	<input id="botton6" value="必殺" type="button" onclick="aktchange6()" />
-	<br>
-	<ul class="gauge_wrap" style="list-style-type: none">
-		<li>
-			<div>
-				<div class="gauge_main2" style=" width: 80%;"></div>
-			</div>
-		</li>
-	</ul>
-	<br> mysumHP
-	<span id="MHP"></span>
+	<span id="turn"></span>
+	
+
+			<img id="enemyimg" src="">
+			<textarea id="log" name="log" cols="50" rows="10" readonly></textarea>
+			<br> <br> <img id="partymember1" src="" width="160">
+			<img id="partymember2" src="" width="160"> <img
+				id="partymember3" src="" width="160"> <br> <input
+				id="botton1" value="攻撃" type="button" onclick="aktchange1()"
+				style="WIDTH: 75px; HEIGHT: 150px" /> <input id="botton2"
+				value="必殺" type="button" onclick="aktchange2()"
+				style="WIDTH: 75px; HEIGHT: 150px" /> <input id="botton3"
+				value="攻撃" type="button" onclick="aktchange3()"
+				style="WIDTH: 75px; HEIGHT: 150px" /> <input id="botton4"
+				value="必殺" type="button" onclick="aktchange4()"
+				style="WIDTH: 75px; HEIGHT: 150px" /> <input id="botton5"
+				value="攻撃" type="button" onclick="aktchange5()"
+				style="WIDTH: 75px; HEIGHT: 150px" /> <input id="botton6"
+				value="必殺" type="button" onclick="aktchange6()"
+				style="WIDTH: 75px; HEIGHT: 150px" /> <br>
+			<ul class="gauge_wrap" style="list-style-type: none">
+				<li>
+					<div>
+						<div class="gauge_main2" style="width: 80%;"></div>
+					</div>
+				</li>
+			</ul>
+			<br> <input value="たたかう" type="button" onclick="attack()"
+				style="WIDTH: 150px; HEIGHT: 150px" />
 
 
 
-	<script type="text/javascript">
-
-	</script>
+			<script type="text/javascript">
+				
+			</script>
+		</div>
+	</div>
 
 </body>
+
 </html>
 
 
