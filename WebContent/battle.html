@@ -8,7 +8,7 @@
 	background: -webkit-gradient(linear, left top, left bottom, from(#555),
 		to(#222));
 	border: solid 5px #000;
-	width: 300px;
+	width: 500px;
 	/* height: 32px;*/
 }
 
@@ -38,7 +38,7 @@
 
 #center02 .inner {
 	position: absolute; /* 絶対配置 */
-	top: 50%; /* 上から半分 */
+	top: 0%; /* 上から半分 */
 	left: 50%; /* 左から半分 */
 	width: 100%; /* 大枠と同じ幅に */
 	margin: -1.5em 0 0 -50%; /* 要素の大きさの半分引く */
@@ -239,9 +239,13 @@
 					</div>
 				</li>
 			</ul>
+	
 
+	turn
+	<span id="turn"></span>
+	
 
-			turn <span id="turn"></span>  <img id="enemyimg" src="">
+			<img id="enemyimg" src="">
 			<textarea id="log" name="log" cols="50" rows="10" readonly></textarea>
 			<br> <br> <img id="partymember1" src="" width="160">
 			<img id="partymember2" src="" width="160"> <img
@@ -265,8 +269,8 @@
 					</div>
 				</li>
 			</ul>
-			<br>  <input value="たたかう"
-				type="button" onclick="attack()" style="WIDTH: 150px; HEIGHT: 150px" />
+			<br> <input value="たたかう" type="button" onclick="attack()"
+				style="WIDTH: 150px; HEIGHT: 150px" />
 
 
 
