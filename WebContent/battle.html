@@ -87,11 +87,11 @@
 	TeamPrinter.fetchslot(user, {
 		callback : function(partyimg) {
 			$("#partymember1").attr("src",
-					"img/character/img_" + partyimg[0] + ".png");
+					"img/character/img_" + partyimg[0] + ".jpg");
 			$("#partymember2").attr("src",
-					"img/character/img_" + partyimg[1] + ".png");
+					"img/character/img_" + partyimg[1] + ".jpg");
 			$("#partymember3").attr("src",
-					"img/character/img_" + partyimg[2] + ".png");
+					"img/character/img_" + partyimg[2] + ".jpg");
 		}
 	});
 
@@ -237,11 +237,13 @@
 	<input value="たたかう" type="button" onclick="attack()" />
 	<br>
 	<img id="partymember1" src="" width="160">
+
 	<img id="partymember2" src="" width="160">
 	<img id="partymember3" src="" width="160">
 	<br>
 	<input id="botton1" value="攻撃" type="button" onclick="aktchange1()" />
 	<input id="botton2" value="必殺" type="button" onclick="aktchange2()" />
+
 	<input id="botton3" value="攻撃" type="button" onclick="aktchange3()" />
 	<input id="botton4" value="必殺" type="button" onclick="aktchange4()" />
 	<input id="botton5" value="攻撃" type="button" onclick="aktchange5()" />
