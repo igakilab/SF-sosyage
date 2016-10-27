@@ -1,38 +1,63 @@
 <html lang="ja">
-  <head>
-  <title>ガチャ</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<head>
+<title>ガチャ</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+#center02 {
+	position: relative; /* 絶対配置の基準点 */
+	width: 100%; /* 600px以下は幅いっぱいに広げる */
+	max-width: 600px; /* 最大幅の指定 */
+	height: 300px; /* 高さの指定 */
+	margin: 0 auto; /* ブロック要素の中央揃え */
+	text-align: center; /* インライン要素の中央揃え */
+	background: #fff; /* 背景色 */
+}
 
-    <script type="text/javascript" src="dwr/engine.js"></script>
-    <script type="text/javascript" src="dwr/util.js"></script>
-    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript" src="js/jquery.serialize.js"></script>
-    <script type="text/javascript" src="js/jquery.cookie.js"></script>
-    <script type="text/javascript" src="dwr/interface/GachaSystem.js"></script>
-    <script type="text/javascript">
-    var userID = $.cookie("userID");
-      function gacha(){
-    	  var user = {userID:userID,userspot1:0,userspot2:0};
-    	  GachaSystem.gachakekka(user,{
-          callback: function(data) {
-        	  $("#"+1).attr('src', 'img/character/img_' + data + ".png");
-          },
-          errorHandler: updateErrorMessage
-        });
-      }
-      function updateErrorMessage(message, exception){
-        $('#error_message').text(message);
-        $('#csprinterReply').text("");
-      }
-    </script>
-  </head>
-  <body>
-    <p>
-    <p>
-	<img src="img/other/img_ura.png" width="120" id= 1>
-	<br></br>
-    <input value="ガチャ" type="button" onclick="gacha()" />
-    </p>
-    <a href="index.html">戻る</a>
-  </body>
+#center02 .inner {
+	position: absolute; /* 絶対配置 */
+	top: 0%; /* 上から半分 */
+	left: 50%; /* 左から半分 */
+	width: 100%; /* 大枠と同じ幅に */
+	margin: -1.5em 0 0 -50%; /* 要素の大きさの半分引く */
+}
+</style>
+<script type="text/javascript" src="dwr/engine.js"></script>
+<script type="text/javascript" src="dwr/util.js"></script>
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="js/jquery.serialize.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script type="text/javascript" src="dwr/interface/GachaSystem.js"></script>
+<script type="text/javascript">
+	var userID = $.cookie("userID");
+	function gacha() {
+		var user = {
+			userID : userID,
+			userspot1 : 0,
+			userspot2 : 0
+		};
+		GachaSystem.gachakekka(user, {
+			callback : function(data) {
+				$("#" + 1).attr('src', 'img/character/img_' + data + ".png");
+			},
+			errorHandler : updateErrorMessage
+		});
+	}
+	function updateErrorMessage(message, exception) {
+		$('#error_message').text(message);
+		$('#csprinterReply').text("");
+	}
+</script>
+</head>
+<body>
+	<div id="center02">
+		<div class="inner">
+			<p>
+			<p>
+				<img src="img/other/img_ura.png" width="120" id=1> <br></br> <input
+					value="ガチャ" type="button" onclick="gacha()" />
+			</p>
+			<a href="index.html">戻る</a>
+		</div>
+	</div>
+</body>
 </html>
