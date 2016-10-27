@@ -49,25 +49,32 @@ public class BattleSystem {
 		return list;
 	}
 
-	public String[] battle(BattleData battledata){
+	public Double[] battle(BattleData battledata){
 		//userIDと味方の行動の読み込み//
 		int ID = battledata.getuserID();
 		int c1 = battledata.getc1();
 		int c2 = battledata.getc2();
 		int c3 = battledata.getc3();
 		int eneID = battledata.getene();
+		//味方の基礎攻撃力
  		double atk = 0;
+ 		//味方の必殺攻撃力倍率
  		double bai = 1;
+ 		//敵の必殺攻撃力軽減
+ 		double los = 1;
 		String[] s = null;
 		String[] result = null;
 		String[] element = null;
 		String[] enement = null;
 		int[] get = new int[3] ;
-		String[] list = new String[4];
+		//敵に与える必殺ダメージ,list[1]に格納する
+		Double adm = 0.0;
+		//味方への回復,list[2]に格納する
+		Double ahr = 0.0;
+		Double[] list = new Double[4];
 		DBController reader = new DBController();
 		double feel = 1 ;
 
-		list[1] = (reader.doget("SELECT AT FROM sfenechara WHERE eneID = " + eneID))[0] ;
 
 		enement = reader.doget("SELECT elm FROM sfenechara WHERE eneID = " + eneID );
 			//slot1のキャラの行動判定//
@@ -85,13 +92,13 @@ public class BattleSystem {
 		}else{
 			result = reader.doget("SELECT atype FROM sfchara WHERE charaID = " + get[0]);
 			if(result[0] == "1"){
-				list[2]  += (reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[0]))[0];
+				adm  = adm + Double.valueOf(reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[0])[0]);
 			}else if(result[0] == "2"){
-				list[3]  += (reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[0]))[0];
+				ahr  = ahr + Double.valueOf(reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[0])[0]);
 			}else if(result[0] == "3"){
 				bai = bai * Double.valueOf(reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[0])[0]);
 			}else {
-				list[1] = String.valueOf(Double.valueOf(list[1])*Double.valueOf(reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[0])[0]));
+				los = los*Double.valueOf(reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[0])[0]);
 			}
 		}
 			//slot2のキャラの行動判定//
@@ -103,13 +110,13 @@ public class BattleSystem {
 		}else{
 			result = reader.doget("SELECT atype FROM sfchara WHERE charaID = " + get[1]);
 			if(result[0] == "1"){
-				list[2]  += (reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[0]))[0];
+				adm  += Double.valueOf(reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[1])[0]);
 			}else if(result[0] == "2"){
-				list[3]  += (reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[0]))[0];
+				ahr  += Double.valueOf(reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[1])[0]);
 			}else if(result[0] == "3"){
-				bai = bai * Double.valueOf(reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[0])[0]);
+				bai = bai * Double.valueOf(reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[1])[0]);
 			}else {
-				list[1] = String.valueOf(Double.valueOf(list[1])*Double.valueOf(reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[0])[0]));
+				los = los*Double.valueOf(reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[1])[0]);
 			}
 		}
 
@@ -122,16 +129,19 @@ public class BattleSystem {
 		}else{
 			result = reader.doget("SELECT atype FROM sfchara WHERE charaID = " + get[2]);
 			if(result[0] == "1"){
-				list[2]  += (reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[0]))[0];
+				adm  += Double.valueOf(reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[2])[0]);
 			}else if(result[0] == "2"){
-				list[3]  += (reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[0]))[0];
+				ahr  += Double.valueOf(reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[2])[0]);
 			}else if(result[0] == "3"){
-				bai = bai * Double.valueOf(reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[0])[0]);
+				bai = bai * Double.valueOf(reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[2])[0]);
 			}else {
-				list[1] = String.valueOf(Double.valueOf(list[1])*Double.valueOf(reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[0])[0]));
+				los = los*Double.valueOf(reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[2])[0]);
 			}
 		}
-		list[0] =(String.valueOf(atk*bai));
+		list[0] = atk*bai;
+		list[1] = Double.valueOf(reader.doget("SELECT AT FROM sfenechara WHERE eneID = " + eneID)[0])*los;
+		list[2] = adm;
+		list[3] = ahr;
 		return list;
 
 	}

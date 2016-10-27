@@ -213,15 +213,22 @@
 
 	function attack(){
 		var eneID = $.cookie("eneID");
-			var battledata = {userID:userID,c1:akt1,c2:akt2,c3:akt3,ene:1}
+			var battledata = {userID:userID,c1:akt1,c2:akt2,c3:akt3,ene:eneID}
 		  	BattleSystem.battle(battledata,{
 	          callback: function(data) {
 	        	  mysumAT = data[0];
 	        	  enemyAT = data[1];
 	        	  if(data[2]>0){
-	        		  $('#log').val($('#log').val() +"必殺ダメージ "+ mysumAT + "のダメージを与えた\n");
+	        		  a -= data[2];
+	        		  $('#log').val($('#log').val() +"必殺ダメージ :"+ data[2] + "のダメージを与えた\n");
 	        		  $('#EHP').text(a.toString() + "/" + enemyHP.toString());
 	  				$('.gauge_main').css('width', (100 * a / enemyHP) + '%');
+	        	  }
+	        	  if(data[3]>0){
+	        		  b += data[3]
+	        		  	$('#log').val($('#log').val() + data[3]+ "回復した\n");
+	        			$('#MHP').text(b.toString() + "/" + mysumHP.toString());
+	        			$('.gauge_main2').css('width', (100 * b / mysumHP) + '%');
 	        	  }
 	        		(function() {
 	    				turnup();
@@ -285,7 +292,6 @@
 			</script>
 		</div>
 	</div>
->>>>>>> refs/remotes/origin/master
 
 </body>
 
