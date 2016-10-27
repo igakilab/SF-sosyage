@@ -30,7 +30,15 @@ public class GachaSystem {
 
 		int charaid = Integer.valueOf(result[get]);
 		reader.dowrite("UPDATE user SET " + "chara" + charaid + " = chara" + charaid + " + 1" + " WHERE userID = " + userID);
-		//"set chara1 = chara1 + 1"//
+		result = reader.doget("SELECT gachacount FROM user WHERE userID =" + userID);
+		int x = Integer.valueOf(result[0])-1;
+		reader.dowrite("UPDATE user SET gachacount = " + x +" WHERE userID = "+ userID );
 		return charaid;
+	}
+
+	public int gachacount(int userID){
+		DBController reader = new DBController();
+		String[] result = reader.doget("SELECT gachacount FROM user WHERE userID = "+userID);
+		return Integer.valueOf(result[0]);
 	}
 }

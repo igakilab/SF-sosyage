@@ -109,7 +109,7 @@
         	slotdata=data;
         	for(var i = 0;i<data.length;++i){
 				$("#textbox").html($("#textbox").html()+'<img src="" width="120" id ='+data[i]+' onclick="Click('+data[i]+')">');
-				$('#' + data[i]).attr('src', 'img/character/img_'+data[i]+'.png');
+				$('#' + data[i]).attr('src', 'img/character/img_'+data[i]+'.jpg');
 				}
         	}
       	}
@@ -124,7 +124,7 @@
 				var id=i;
 				if(data2[i]>0&&i!=slotdata[0]&&i!=slotdata[1]&&i!=slotdata[2]){
 				$("#charabox").html($("#charabox").html()+'<img src="" width="120" id ='+id+' onclick="Click('+id+')">');
-				$('#' + id).attr('src', 'img/character/img_'+i+'.png');
+				$('#' + id).attr('src', 'img/character/img_'+i+'.jpg');
 					}
 				}
 			}
@@ -132,7 +132,10 @@
     );}
     fetchslot();
     characterfetch();
-    </script>
-    <a href="index.html">戻る</a>
+    </script>]
+    <br></br>
+    <a href = "battle.html">戦闘へ進む</a>
+    <br></br>
+    <a href = "index.html">戻る</a>
   </body>
 </html>

@@ -8,32 +8,57 @@
     <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="js/jquery.serialize.js"></script>
     <script type="text/javascript" src="js/jquery.cookie.js"></script>
-    <script type="text/javascript" src="dwr/interface/MultiplePrinter.js"></script>
+    <script type="text/javascript" src="dwr/interface/GachaSystem.js"></script>
     <script type="text/javascript">
-      function update(){
-        var formData = $('#csprinter_form').serializeJson();
-        MultiplePrinter.execute(formData, {
-          callback: function(data) {
-            $('#csprinterReply').text(data);
-            $('#error_message').text("");
-          },
-          errorHandler: updateErrorMessage
-        });
-      }
-      function updateErrorMessage(message, exception){
-        $('#error_message').text(message);
-        $('#csprinterReply').text("");
-      }
+    var userID = $.cookie("userID");
+
+
+
+    GachaSystem.gachacount(userID,{
+    	callback: function(data){
+    		 $('#gachacount').text(data);
+    		 if(data <= 0){
+    		 	$("#gacha").prop("disabled", true);
+    		 }else{
+    		 	$("#gacha").prop("disabled", false);
+    		 }
+    	}
+    })
+    function gacha(){
+  	  var user = {userID:userID,userspot1:0,userspot2:0};
+  	  GachaSystem.gachakekka(user,{
+        callback: function(data) {
+      	  $("#"+1).attr('src', 'img/character/img_' + data + ".jpg");
+      	GachaSystem.gachacount(userID,{
+    		callback: function(data){
+    		 $('#gachacount').text(data);
+    		 if(data <= 0){
+    			 $("#gacha").prop("disabled", true);
+    		 }
+    		}
+      	})
+        },
+        errorHandler: updateErrorMessage
+      });
+    }
+    function updateErrorMessage(message, exception){
+      $('#error_message').text(message);
+      $('#csprinterReply').text("");
+    }
     </script>
   </head>
   <body>
       <p>
-     <a href="battle.html">戦闘へ</a>
-   </p><p>
-     <a href="hensei.html">編成画面</a>
-   </p><p>
-    <a href="gacha.html">ガチャ画面</a>
+	<img src="img/other/img_ura.png" width="120" id= 1>
+	<br></br>
+    <input id = gacha value="ガチャを引く" type="button" onclick="gacha()" />
     </p>
+    <br></br><p>
+    あと<span id = "gachacount"></span>回引けます
+    <p/><br></br>
+      <p>
+     <a href="hensei.html">編成へ進む</a>
+   </p>
 
   </body>
 </html>

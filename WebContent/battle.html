@@ -79,15 +79,21 @@
 		}
 	});
 
-	BattleSystem.getenemy(1, {
-		//1とはステージを表している
-		callback : function(enedata) {
-			enemyHP = parseInt(enedata[0]);
-			enemyAT = parseInt(enedata[1]);
-			a = enemyHP;
-			$("#enemyimg").attr("src", "img/" + enedata[2]);
+	BattleSystem.geteneID(userID,{
+		callback : function(data){
+			$.cookie("eneID",data);
+			BattleSystem.getenemy(data, {
+				//1とはステージを表している
+				callback : function(enedata) {
+					enemyHP = parseInt(enedata[0]);
+					enemyAT = parseInt(enedata[1]);
+					a = enemyHP;
+					$("#enemyimg").attr("src", "img/enemy/" + enedata[2]);
+				}
+			});
 		}
 	});
+
 	var user = {
 		userID : userID,
 		userspot1 : 0,
@@ -96,15 +102,15 @@
 	TeamPrinter.fetchslot(user, {
 		callback : function(partyimg) {
 			$("#partymember1").attr("src",
-					"img/character/img_" + partyimg[0] + ".png");
+					"img/character/img_" + partyimg[0] + ".jpg");
 			$("#partymember2").attr("src",
-					"img/character/img_" + partyimg[1] + ".png");
+					"img/character/img_" + partyimg[1] + ".jpg");
 			$("#partymember3").attr("src",
-					"img/character/img_" + partyimg[2] + ".png");
+					"img/character/img_" + partyimg[2] + ".jpg");
 		}
 	});
 
-	BattleSystem.getatkhp(1, {
+	BattleSystem.getatkhp(userID, {
 		callback : function(data) {
 			mysumAT = parseInt(data[0]);
 			mysumHP = parseInt(data[1]);
@@ -131,7 +137,8 @@
 			if (a <= 0) {
 				$('#EHP').text(a.toString() + "/" + enemyHP.toString());
 				$('.gauge_main').css('width', (100 * a / enemyHP) + '%');
-				$.cookie("turn", turncount);
+				$.cookie("turn",turncount);
+
 				alert('倒した!');
 				window.location.replace('result.html');
 				return;
@@ -180,48 +187,46 @@
 		$.cookie("akt3", akt3);
 		colorchange();
 	}
-	function colorchange() {
-		if (akt1 == 1) {
-			$("#botton1").css("color", "#ff0000");
-			$("#botton2").css("color", "#000000");
-		} else {
-			$("#botton2").css("color", "#ff0000");
-			$("#botton1").css("color", "#000000");
+	function colorchange(){
+		if(akt1==1){
+			$("#botton1").css("color","#ff0000");
+			$("#botton2").css("color","#000000");
+		}else{
+			$("#botton2").css("color","#ff0000");
+			$("#botton1").css("color","#000000");
 		}
-		if (akt2 == 1) {
-			$("#botton3").css("color", "#ff0000");
-			$("#botton4").css("color", "#000000");
-		} else {
-			$("#botton4").css("color", "#ff0000");
-			$("#botton3").css("color", "#000000");
+		if(akt2==1){
+			$("#botton3").css("color","#ff0000");
+			$("#botton4").css("color","#000000");
+		}else{
+			$("#botton4").css("color","#ff0000");
+			$("#botton3").css("color","#000000");
 		}
-		if (akt3 == 1) {
-			$("#botton5").css("color", "#ff0000");
-			$("#botton6").css("color", "#000000");
-		} else {
-			$("#botton6").css("color", "#ff0000");
-			$("#botton5").css("color", "#000000");
+		if(akt3==1){
+			$("#botton5").css("color","#ff0000");
+			$("#botton6").css("color","#000000");
+		}else{
+			$("#botton6").css("color","#ff0000");
+			$("#botton5").css("color","#000000");
 		}
-
 	}
 
-	function attack() {
-		var battledata = {
-			userID : userID,
-			c1 : akt1,
-			c2 : akt2,
-			c3 : akt3,
-			ene : 1
-		}
-		BattleSystem.battle(battledata, {
-			callback : function(data) {
-				mysumAT = data[0];
-
-				(function() {
-					turnup();
-				})();
-			},
-
+	function attack(){
+		var eneID = $.cookie("eneID");
+			var battledata = {userID:userID,c1:akt1,c2:akt2,c3:akt3,ene:1}
+		  	BattleSystem.battle(battledata,{
+	          callback: function(data) {
+	        	  mysumAT = data[0];
+	        	  enemyAT = data[1];
+	        	  if(data[2]>0){
+	        		  $('#log').val($('#log').val() +"必殺ダメージ "+ mysumAT + "のダメージを与えた\n");
+	        		  $('#EHP').text(a.toString() + "/" + enemyHP.toString());
+	  				$('.gauge_main').css('width', (100 * a / enemyHP) + '%');
+	        	  }
+	        		(function() {
+	    				turnup();
+	    			})();
+	          },
 		});
 	}
 </script>
@@ -239,11 +244,12 @@
 					</div>
 				</li>
 			</ul>
-	
+
 
 	turn
+
 	<span id="turn"></span>
-	
+
 
 			<img id="enemyimg" src="">
 			<textarea id="log" name="log" cols="50" rows="10" readonly></textarea>
@@ -275,10 +281,11 @@
 
 
 			<script type="text/javascript">
-				
+
 			</script>
 		</div>
 	</div>
+>>>>>>> refs/remotes/origin/master
 
 </body>
 

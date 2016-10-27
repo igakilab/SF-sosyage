@@ -1,6 +1,6 @@
 <html lang="ja">
   <head>
-  <title>新規登録</title>
+  <title>リザルト</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
     <script type="text/javascript" src="dwr/engine.js"></script>
@@ -11,10 +11,15 @@
     <script type="text/javascript" src="js/jquery.cookie.js"></script>
     <script type="text/javascript">
     	var turn = $.cookie("turn");
+    	var userID = $.cookie("userID");
     	var score = 0;
-    	Score.scorecount(turn,{
+    	Score.scorecount(turn,userID,{
           callback: function(data) {
-        	  $("div").text("今回のバトルのスコアは「"+data+"」です。");
+        	  $("div").text("今回のバトルのスコアは「"+data[0]+"」です。");
+        	  $('#ticket').text(data[0]);
+        	  if(data[1]>5){
+        		  $('.getch').html('<b>すべての戦闘が終了しました</b><br></br><a class = getch  href="finalscreen.html">最終スコア確認へ進む</a>');
+        	  }
           },
         });
     </script>
@@ -22,8 +27,9 @@
   <body>
     <p>
     <div></div>
-	<p>
-    <a href="index.html">戻る</a>
+    今回獲得したガチャは<span id= ticket></span>回です
+	<p class = getch>
+    <a  href="index.html">戻る</a>
     </p>
   </body>
 </html>
