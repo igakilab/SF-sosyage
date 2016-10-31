@@ -45,7 +45,7 @@
 }
 
 textarea {
-    resize: none;
+	resize: none;
 }
 </style>
 <script type="text/javascript" src="dwr/engine.js"></script>
@@ -83,9 +83,9 @@ textarea {
 		}
 	});
 
-	BattleSystem.geteneID(userID,{
-		callback : function(data){
-			$.cookie("eneID",data);
+	BattleSystem.geteneID(userID, {
+		callback : function(data) {
+			$.cookie("eneID", data);
 			BattleSystem.getenemy(data, {
 				//1とはステージを表している
 				callback : function(enedata) {
@@ -141,7 +141,7 @@ textarea {
 			if (a <= 0) {
 				$('#EHP').text(a.toString() + "/" + enemyHP.toString());
 				$('.gauge_main').css('width', (100 * a / enemyHP) + '%');
-				$.cookie("turn",turncount);
+				$.cookie("turn", turncount);
 
 				alert('倒した!');
 				window.location.replace('result.html');
@@ -191,46 +191,54 @@ textarea {
 		$.cookie("akt3", akt3);
 		colorchange();
 	}
-	function colorchange(){
-		if(akt1==1){
-			$("#botton1").css("color","#ff0000");
-			$("#botton2").css("color","#000000");
-		}else{
-			$("#botton2").css("color","#ff0000");
-			$("#botton1").css("color","#000000");
+	function colorchange() {
+		if (akt1 == 1) {
+			$("#botton1").css("color", "#ff0000");
+			$("#botton2").css("color", "#000000");
+		} else {
+			$("#botton2").css("color", "#ff0000");
+			$("#botton1").css("color", "#000000");
 		}
-		if(akt2==1){
-			$("#botton3").css("color","#ff0000");
-			$("#botton4").css("color","#000000");
-		}else{
-			$("#botton4").css("color","#ff0000");
-			$("#botton3").css("color","#000000");
+		if (akt2 == 1) {
+			$("#botton3").css("color", "#ff0000");
+			$("#botton4").css("color", "#000000");
+		} else {
+			$("#botton4").css("color", "#ff0000");
+			$("#botton3").css("color", "#000000");
 		}
-		if(akt3==1){
-			$("#botton5").css("color","#ff0000");
-			$("#botton6").css("color","#000000");
-		}else{
-			$("#botton6").css("color","#ff0000");
-			$("#botton5").css("color","#000000");
+		if (akt3 == 1) {
+			$("#botton5").css("color", "#ff0000");
+			$("#botton6").css("color", "#000000");
+		} else {
+			$("#botton6").css("color", "#ff0000");
+			$("#botton5").css("color", "#000000");
 		}
 	}
 
-	function attack(){
+	function attack() {
 		var eneID = $.cookie("eneID");
-			var battledata = {userID:userID,c1:akt1,c2:akt2,c3:akt3,ene:1}
-		  	BattleSystem.battle(battledata,{
-	          callback: function(data) {
-	        	  mysumAT = data[0];
-	        	  enemyAT = data[1];
-	        	  if(data[2]>0){
-	        		  $('#log').val($('#log').val() +"必殺ダメージ "+ mysumAT + "のダメージを与えた\n");
-	        		  $('#EHP').text(a.toString() + "/" + enemyHP.toString());
-	  				$('.gauge_main').css('width', (100 * a / enemyHP) + '%');
-	        	  }
-	        		(function() {
-	    				turnup();
-	    			})();
-	          },
+		var battledata = {
+			userID : userID,
+			c1 : akt1,
+			c2 : akt2,
+			c3 : akt3,
+			ene : 1
+		}
+		BattleSystem.battle(battledata, {
+			callback : function(data) {
+				mysumAT = data[0];
+				enemyAT = data[1];
+				if (data[2] > 0) {
+					$('#log').val(
+							$('#log').val() + "必殺ダメージ " + mysumAT
+									+ "のダメージを与えた\n");
+					$('#EHP').text(a.toString() + "/" + enemyHP.toString());
+					$('.gauge_main').css('width', (100 * a / enemyHP) + '%');
+				}
+				(function() {
+					turnup();
+				})();
+			},
 		});
 	}
 </script>
@@ -250,11 +258,10 @@ textarea {
 			</ul>
 
 
-	<I><FONT size="6">turn</FONT></I>
+			<I><FONT size="6">turn</FONT></I> <FONT size="7"><font
+				face="Arial Black"><span id="turn"></span></font></FONT>
 
-	<FONT size="7"><font face="Arial Black"><span id="turn"></span></font></FONT>
-
-
+			<div style="background: url(img/other/ring.png) no-repeat 120px 8px;"></div>
 			<img id="enemyimg" src="">
 			<textarea id="log" name="log" cols="50" rows="10" readonly></textarea>
 			<br> <br> <img id="partymember1" src="" width="160">
