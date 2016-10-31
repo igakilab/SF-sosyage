@@ -74,4 +74,13 @@ public class TeamPrinter {
 	        }
 	        return list;
 	}
+	public List<String>charahp(){
+		   List<String> list = new ArrayList<>();
+	        DBController reader = new DBController();
+	        int count = reader.doget("SELECT charaID FROM sfchara").length;
+	        for(int i=1;i<=count;i++){
+	            	list.add(reader.doget("SELECT hp FROM sfchara WHERE charaID = " + i)[0]);
+	        }
+	        return list;
+	}
 }

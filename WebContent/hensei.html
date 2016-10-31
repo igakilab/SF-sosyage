@@ -103,6 +103,7 @@
     var slotdata;
     var charaname;
     var atk;
+    var hp;
     TeamPrinter.charaname({
     	callback:function(name){
     		charaname = name;
@@ -111,6 +112,16 @@
     TeamPrinter.charaatk({
     	callback:function(at){
     		atk = at;
+    	}
+    });
+    TeamPrinter.charaatk({
+    	callback:function(at){
+    		atk = at;
+    	}
+    });
+    TeamPrinter.charahp({
+    	callback:function(hitpoint){
+    		hp = hitpoint;
     	}
     });
     function fetchslot(){
@@ -137,7 +148,7 @@
 			for(var i = 0;i<data2.length;++i){
 				var id=i+1;
 				if(data2[i]>0&&id!=slotdata[0]&&id!=slotdata[1]&&id!=slotdata[2]){
-				$("#charabox").html($("#charabox").html()+'<td><p><img src="" width="120" id ='+id+' onclick="Click('+id+')"></p><p>'+charaname[i]+'</p><p>'+atk[i]+'</p></td>');
+				$("#charabox").html($("#charabox").html()+'<td><p><img src="" width="120" id ='+id+' onclick="Click('+id+')"></p><p>'+charaname[i]+'</p><p>攻撃力 '+atk[i]+'</p><p>HP '+hp[i]+'</p></td>');
 				$('#' + id).attr('src', 'img/character/img_'+id+'.jpg');
 					}
 				}
