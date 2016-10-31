@@ -91,7 +91,10 @@
 		<br></br>
 	</p>
 	<p>
-	<div id="textbox"></div>
+	<table>
+		<tr id="slotbox">
+		</tr>
+	</table>
 	<br></br>
 	<table>
 		<tr id="charabox">
@@ -127,12 +130,14 @@
     function fetchslot(){
     TeamPrinter.fetchslot(user, {
         callback: function(data) {
-			if($('#textbox').length){
-				$("#textbox").empty();
+			if($('#slotbox').length){
+				$("#slotbox").empty();
 			}
         	slotdata=data;
+
         	for(var i = 0;i<data.length;++i){
-				$("#textbox").html($("#textbox").html()+'<img src="" width="120" id ='+data[i]+' onclick="Click('+data[i]+')">');
+        		var x = data[i]-1;
+				$("#slotbox").html($("#slotbox").html()+'<td><p><img src="" width="120" id ='+data[i]+' onclick="Click('+data[i]+')"></p><p>'+charaname[x]+'</p><p>攻撃力 '+atk[x]+'</p><p>HP '+hp[x]+'</p></td>');
 				$('#' + data[i]).attr('src', 'img/character/img_'+data[i]+'.jpg');
 				}
         	}
@@ -155,8 +160,10 @@
 			}
 		}
     );}
-    fetchslot();
-    characterfetch();
+    setTimeout( function () {
+    	fetchslot();
+    	characterfetch();
+    } , 1000 );
     </script>
 	<br></br>
 	<a href="battle.html">戦闘へ進む</a>
