@@ -109,16 +109,10 @@ textarea {
 		}
 	});
 
-<<<<<<< HEAD
 	BattleSystem.geteneID(userID,{
 		callback : function(data){
 			eneID=data;
 			alert(data);
-=======
-	BattleSystem.geteneID(userID, {
-		callback : function(data) {
-			$.cookie("eneID", data);
->>>>>>> refs/remotes/origin/master
 			BattleSystem.getenemy(data, {
 				//1とはステージを表している
 				callback : function(enedata) {
@@ -248,7 +242,6 @@ textarea {
 		}
 	}
 
-<<<<<<< HEAD
 	function attack(){
 			var battledata = {userID:userID,c1:akt1,c2:akt2,c3:akt3,ene:eneID}
 		  	BattleSystem.battle(battledata,{
@@ -272,32 +265,7 @@ textarea {
 	    				turnup();
 	    			})();
 	          },
-=======
-	function attack() {
-		var eneID = $.cookie("eneID");
-		var battledata = {
-			userID : userID,
-			c1 : akt1,
-			c2 : akt2,
-			c3 : akt3,
-			ene : 1
-		}
-		BattleSystem.battle(battledata, {
-			callback : function(data) {
-				mysumAT = data[0];
-				enemyAT = data[1];
-				if (data[2] > 0) {
-					$('#log').val(
-							$('#log').val() + "必殺ダメージ " + mysumAT
-									+ "のダメージを与えた\n");
-					$('#EHP').text(a.toString() + "/" + enemyHP.toString());
-					$('.gauge_main').css('width', (100 * a / enemyHP) + '%');
-				}
-				(function() {
-					turnup();
-				})();
-			},
->>>>>>> refs/remotes/origin/master
+
 		});
 	}
 </script>
@@ -307,7 +275,7 @@ textarea {
 
 	<div id="center02">
 		<div class="inner">
-		
+
 	<ul class="gauge_wrap" style="list-style-type: none">
 		<li>
 			<div>
@@ -323,7 +291,7 @@ textarea {
 			</div>
 		</li>
 	</ul>
-		
+
 			turn <span id="turn"></span> <img id="enemyimg" src="">
 			<textarea id="log" name="log" cols="50" rows="10" readonly></textarea>
 			<br> <br> <img id="partymember1" src="" width="160">
@@ -347,7 +315,7 @@ textarea {
 
 
 			<script type="text/javascript">
-				
+
 			</script>
 		</div>
 	</div>
