@@ -1,20 +1,20 @@
 <html lang="ja">
-  <head>
-  <title>編成</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <style>
-  .border1 {
-  	border: double 10px #0000ff;
-  }
-  </style>
+<head>
+<title>編成</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+.border1 {
+	border: double 10px #0000ff;
+}
+</style>
 
-    <script type="text/javascript" src="dwr/engine.js"></script>
-    <script type="text/javascript" src="dwr/util.js"></script>
-    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript" src="js/jquery.serialize.js"></script>
-    <script type="text/javascript" src="js/jquery.cookie.js"></script>
-    <script type="text/javascript" src="dwr/interface/TeamPrinter.js"></script>
-    <script type="text/javascript">
+<script type="text/javascript" src="dwr/engine.js"></script>
+<script type="text/javascript" src="dwr/util.js"></script>
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="js/jquery.serialize.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script type="text/javascript" src="dwr/interface/TeamPrinter.js"></script>
+<script type="text/javascript">
     var kjid = 0;
     var userID = $.cookie("userID");
     function Click(number){
@@ -85,21 +85,34 @@
       }
     </script>
 
-  </head>
-  <body>
+</head>
+<body>
 	<p>
-    <br></br>
-    </p>
-    <p>
-    <div id = "textbox">
-    </div>
-    <br></br>
-    <div id = "charabox">
-    </div>
-    <script type="text/javascript">
+		<br></br>
+	</p>
+	<p>
+	<div id="textbox"></div>
+	<br></br>
+	<table>
+		<tr id="charabox">
+		</tr>
+	</table>
+	<script type="text/javascript">
     var userID = $.cookie("userID");
     var user = {userID:userID,userspot1:0,userspot2:0};
     var slotdata;
+    var charaname;
+    var atk;
+    TeamPrinter.charaname({
+    	callback:function(name){
+    		charaname = name;
+    	}
+    });
+    TeamPrinter.charaatk({
+    	callback:function(at){
+    		atk = at;
+    	}
+    });
     function fetchslot(){
     TeamPrinter.fetchslot(user, {
         callback: function(data) {
@@ -114,17 +127,18 @@
         	}
       	}
     );}
+
     function characterfetch (){
     TeamPrinter.characterfetch(user,{
 		callback:function(data2){
 			if($('#charabox').length){
 				$("#charabox").empty();
 			}
-			for(var i = 1;i<=data2.length;++i){
-				var id=i;
-				if(data2[i]>0&&i!=slotdata[0]&&i!=slotdata[1]&&i!=slotdata[2]){
-				$("#charabox").html($("#charabox").html()+'<img src="" width="120" id ='+id+' onclick="Click('+id+')">');
-				$('#' + id).attr('src', 'img/character/img_'+i+'.jpg');
+			for(var i = 0;i<data2.length;++i){
+				var id=i+1;
+				if(data2[i]>0&&id!=slotdata[0]&&id!=slotdata[1]&&id!=slotdata[2]){
+				$("#charabox").html($("#charabox").html()+'<td><p><img src="" width="120" id ='+id+' onclick="Click('+id+')"></p><p>'+charaname[i]+'</p><p>'+atk[i]+'</p></td>');
+				$('#' + id).attr('src', 'img/character/img_'+id+'.jpg');
 					}
 				}
 			}
@@ -133,9 +147,9 @@
     fetchslot();
     characterfetch();
     </script>
-    <br></br>
-    <a href = "battle.html">戦闘へ進む</a>
-    <br></br>
-    <a href = "index.html">戻る</a>
-  </body>
+	<br></br>
+	<a href="battle.html">戦闘へ進む</a>
+	<br></br>
+	<a href="index.html">戻る</a>
+</body>
 </html>
