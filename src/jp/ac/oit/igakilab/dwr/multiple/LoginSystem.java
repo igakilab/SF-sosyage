@@ -29,7 +29,7 @@ public class LoginSystem {
 			throw new InvalidValueException("このIDは使用できません");
 		}
 		String[] result = reader.doget("SELECT COUNT(userID)+1 FROM user");
-		reader.dowrite("INSERT INTO user VALUES(" +  result[0] +",'" + username + "','"+password+"',4,5,6,0,0,0,1,1,1,0,0,0,0,0,0,0,0,99999)");
+		reader.dowrite("INSERT INTO user VALUES(" +  result[0] +",'" + username + "','"+password+"',4,5,6,0,0,0,1,1,1,0,0,0,0,0,0,0,0,99999,5,1,0)");
 	}
 
 }
