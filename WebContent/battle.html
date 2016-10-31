@@ -81,7 +81,8 @@
 
 	BattleSystem.geteneID(userID,{
 		callback : function(data){
-			$.cookie("eneID",data);
+			eneID=data;
+			alert(data);
 			BattleSystem.getenemy(data, {
 				//1とはステージを表している
 				callback : function(enedata) {
@@ -212,12 +213,12 @@
 	}
 
 	function attack(){
-		var eneID = $.cookie("eneID");
 			var battledata = {userID:userID,c1:akt1,c2:akt2,c3:akt3,ene:eneID}
 		  	BattleSystem.battle(battledata,{
 	          callback: function(data) {
 	        	  mysumAT = data[0];
 	        	  enemyAT = data[1];
+	        	  alert(data[2]);
 	        	  if(data[2]>0){
 	        		  a -= data[2];
 	        		  $('#log').val($('#log').val() +"必殺ダメージ :"+ data[2] + "のダメージを与えた\n");

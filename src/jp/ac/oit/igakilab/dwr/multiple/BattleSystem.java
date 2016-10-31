@@ -75,27 +75,28 @@ public class BattleSystem {
 		DBController reader = new DBController();
 		double feel = 1 ;
 
-
+		//敵の属性の判定
 		enement = reader.doget("SELECT elm FROM sfenechara WHERE eneID = " + eneID );
-			//slot1のキャラの行動判定//
+		//slotのキャラの行動判定
 		for(int i = 0;i<3;i++){
 			s = reader.doget("SELECT slot" + (i+1) + " FROM user WHERE userID = " + ID );
 			get[i] = Integer.valueOf(s[0]);
 
 		}
 
+		//slot1のキャラの行動判定
 		if(c1 == 1){
 			result = reader.doget("SELECT atk FROM sfchara WHERE charaID = " + get[0]);
 			element = reader.doget("SELECT elm FROM sfchara WHERE charaID = " + get[0]);
 			feel = feeling(Integer.valueOf(element[0]),Integer.valueOf(enement[0]));
 			atk = atk + Double.valueOf(result[0])*feel;
 		}else{
-			result = reader.doget("SELECT atype FROM sfchara WHERE charaID = " + get[0]);
-			if(result[0] == "1"){
+			int x = Integer.valueOf((reader.doget("SELECT atype FROM sfchara WHERE charaID = " + get[0])[0]));
+			if(x == 1){
 				adm  = adm + Double.valueOf(reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[0])[0]);
-			}else if(result[0] == "2"){
+			}else if(x == 2){
 				ahr  = ahr + Double.valueOf(reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[0])[0]);
-			}else if(result[0] == "3"){
+			}else if(x == 3){
 				bai = bai * Double.valueOf(reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[0])[0]);
 			}else {
 				los = los*Double.valueOf(reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[0])[0]);
@@ -108,12 +109,12 @@ public class BattleSystem {
 			feel = feeling(Integer.valueOf(element[0]),Integer.valueOf(enement[0]));
 			atk = atk + Double.valueOf(result[0])*feel;
 		}else{
-			result = reader.doget("SELECT atype FROM sfchara WHERE charaID = " + get[1]);
-			if(result[0] == "1"){
+			int x = Integer.valueOf((reader.doget("SELECT atype FROM sfchara WHERE charaID = " + get[1])[0]));
+			if(x == 1){
 				adm  += Double.valueOf(reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[1])[0]);
-			}else if(result[0] == "2"){
+			}else if(x == 2){
 				ahr  += Double.valueOf(reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[1])[0]);
-			}else if(result[0] == "3"){
+			}else if(x == 3){
 				bai = bai * Double.valueOf(reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[1])[0]);
 			}else {
 				los = los*Double.valueOf(reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[1])[0]);
@@ -127,12 +128,12 @@ public class BattleSystem {
 			feel = feeling(Integer.valueOf(element[0]),Integer.valueOf(enement[0]));
 			atk = atk + Double.valueOf(result[0])*feel;
 		}else{
-			result = reader.doget("SELECT atype FROM sfchara WHERE charaID = " + get[2]);
-			if(result[0] == "1"){
+			int x = Integer.valueOf((reader.doget("SELECT atype FROM sfchara WHERE charaID = " + get[2])[0]));
+			if(x == 1){
 				adm  += Double.valueOf(reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[2])[0]);
-			}else if(result[0] == "2"){
+			}else if(x == 2){
 				ahr  += Double.valueOf(reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[2])[0]);
-			}else if(result[0] == "3"){
+			}else if(x == 3){
 				bai = bai * Double.valueOf(reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[2])[0]);
 			}else {
 				los = los*Double.valueOf(reader.doget("SELECT aefe FROM sfchara WHERE charaID = " + get[2])[0]);
