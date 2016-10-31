@@ -4,12 +4,36 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style>
 .gauge_wrap li>div {
+	position: relative;
+	top: 250px;
+	left: 280px;
 	background: -moz-linear-gradient(top, #555, #222);
 	background: -webkit-gradient(linear, left top, left bottom, from(#555),
 		to(#222));
 	border: solid 5px #000;
+	/*ゲージ周りの黒*/
 	width: 500px;
-	/* height: 32px;*/
+	/*横幅*/
+	height: 22px;
+	background: -moz-linear-gradient(top, #555, #222);
+	/*縦幅*/
+	-webkit-transform: rotate(90deg);
+}
+
+.gauge_wraa li>div {
+	position: absolute;
+	bottom: 250px;
+	right: 330px;
+	background: -moz-linear-gradient(top, #555, #222);
+	background: -webkit-gradient(linear, left top, left bottom, from(#555),
+		to(#222));
+	border: solid 5px #000;
+	/*ゲージ周りの黒*/
+	width: 500px;
+	/*横幅*/
+	height: 22px;
+	/*縦幅*/
+	-webkit-transform: rotate(-90deg);
 }
 
 .gauge_wrap .gauge_main {
@@ -17,23 +41,25 @@
 	background: -webkit-gradient(linear, left top, left bottom, from(#9FF),
 		to(#0FF));
 	height: 22px;
+	/*ゲージ上中身縦幅*/
 }
 
-.gauge_wrap .gauge_main2 {
+.gauge_wraa .gauge_main2 {
 	background: -moz-linear-gradient(top, #9FF, #0FF);
 	background: -webkit-gradient(linear, left top, left bottom, from(#ADFF2F),
 		to(#7FFF00));
 	height: 22px;
+	/*ゲージ下中身縦幅*/
 }
 
 #center02 {
 	position: relative; /* 絶対配置の基準点 */
 	width: 100%; /* 600px以下は幅いっぱいに広げる */
 	max-width: 600px; /* 最大幅の指定 */
-	height: 300px; /* 高さの指定 */
+	height: 0px; /* 高さの指定 */
 	margin: 0 auto; /* ブロック要素の中央揃え */
 	text-align: center; /* インライン要素の中央揃え */
-	background: #fff; /* 背景色 */
+	background: #ffcc99; /* 背景色 */
 }
 
 #center02 .inner {
@@ -44,9 +70,9 @@
 	margin: -1.5em 0 0 -50%; /* 要素の大きさの半分引く */
 }
 
-textarea {  
-    resize: none;  
-}  
+textarea {
+	resize: none;
+}
 </style>
 <script type="text/javascript" src="dwr/engine.js"></script>
 <script type="text/javascript" src="dwr/util.js"></script>
@@ -83,10 +109,16 @@ textarea {
 		}
 	});
 
+<<<<<<< HEAD
 	BattleSystem.geteneID(userID,{
 		callback : function(data){
 			eneID=data;
 			alert(data);
+=======
+	BattleSystem.geteneID(userID, {
+		callback : function(data) {
+			$.cookie("eneID", data);
+>>>>>>> refs/remotes/origin/master
 			BattleSystem.getenemy(data, {
 				//1とはステージを表している
 				callback : function(enedata) {
@@ -142,7 +174,7 @@ textarea {
 			if (a <= 0) {
 				$('#EHP').text(a.toString() + "/" + enemyHP.toString());
 				$('.gauge_main').css('width', (100 * a / enemyHP) + '%');
-				$.cookie("turn",turncount);
+				$.cookie("turn", turncount);
 
 				alert('倒した!');
 				window.location.replace('result.html');
@@ -192,30 +224,31 @@ textarea {
 		$.cookie("akt3", akt3);
 		colorchange();
 	}
-	function colorchange(){
-		if(akt1==1){
-			$("#botton1").css("color","#ff0000");
-			$("#botton2").css("color","#000000");
-		}else{
-			$("#botton2").css("color","#ff0000");
-			$("#botton1").css("color","#000000");
+	function colorchange() {
+		if (akt1 == 1) {
+			$("#botton1").css("color", "#ff0000");
+			$("#botton2").css("color", "#000000");
+		} else {
+			$("#botton2").css("color", "#ff0000");
+			$("#botton1").css("color", "#000000");
 		}
-		if(akt2==1){
-			$("#botton3").css("color","#ff0000");
-			$("#botton4").css("color","#000000");
-		}else{
-			$("#botton4").css("color","#ff0000");
-			$("#botton3").css("color","#000000");
+		if (akt2 == 1) {
+			$("#botton3").css("color", "#ff0000");
+			$("#botton4").css("color", "#000000");
+		} else {
+			$("#botton4").css("color", "#ff0000");
+			$("#botton3").css("color", "#000000");
 		}
-		if(akt3==1){
-			$("#botton5").css("color","#ff0000");
-			$("#botton6").css("color","#000000");
-		}else{
-			$("#botton6").css("color","#ff0000");
-			$("#botton5").css("color","#000000");
+		if (akt3 == 1) {
+			$("#botton5").css("color", "#ff0000");
+			$("#botton6").css("color", "#000000");
+		} else {
+			$("#botton6").css("color", "#ff0000");
+			$("#botton5").css("color", "#000000");
 		}
 	}
 
+<<<<<<< HEAD
 	function attack(){
 			var battledata = {userID:userID,c1:akt1,c2:akt2,c3:akt3,ene:eneID}
 		  	BattleSystem.battle(battledata,{
@@ -239,31 +272,59 @@ textarea {
 	    				turnup();
 	    			})();
 	          },
+=======
+	function attack() {
+		var eneID = $.cookie("eneID");
+		var battledata = {
+			userID : userID,
+			c1 : akt1,
+			c2 : akt2,
+			c3 : akt3,
+			ene : 1
+		}
+		BattleSystem.battle(battledata, {
+			callback : function(data) {
+				mysumAT = data[0];
+				enemyAT = data[1];
+				if (data[2] > 0) {
+					$('#log').val(
+							$('#log').val() + "必殺ダメージ " + mysumAT
+									+ "のダメージを与えた\n");
+					$('#EHP').text(a.toString() + "/" + enemyHP.toString());
+					$('.gauge_main').css('width', (100 * a / enemyHP) + '%');
+				}
+				(function() {
+					turnup();
+				})();
+			},
+>>>>>>> refs/remotes/origin/master
 		});
 	}
 </script>
 </head>
+<body bgcolor="#ffcc99">
 
 
-<body>
 	<div id="center02">
 		<div class="inner">
+		
+	<ul class="gauge_wrap" style="list-style-type: none">
+		<li>
+			<div>
+				<div class="gauge_main" style="width: 80%;"></div>
+			</div>
+		</li>
+	</ul>
 
-			<ul class="gauge_wrap" style="list-style-type: none">
-				<li>
-					<div>
-						<div class="gauge_main" style="width: 80%;"></div>
-					</div>
-				</li>
-			</ul>
-
-
-	turn
-
-	<span id="turn"></span>
-
-
-			<img id="enemyimg" src="">
+	<ul class="gauge_wraa" style="list-style-type: none">
+		<li>
+			<div>
+				<div class="gauge_main2" style="width: 80%;"></div>
+			</div>
+		</li>
+	</ul>
+		
+			turn <span id="turn"></span> <img id="enemyimg" src="">
 			<textarea id="log" name="log" cols="50" rows="10" readonly></textarea>
 			<br> <br> <img id="partymember1" src="" width="160">
 			<img id="partymember2" src="" width="160"> <img
@@ -279,21 +340,14 @@ textarea {
 				value="攻撃" type="button" onclick="aktchange5()"
 				style="WIDTH: 75px; HEIGHT: 150px" /> <input id="botton6"
 				value="必殺" type="button" onclick="aktchange6()"
-				style="WIDTH: 75px; HEIGHT: 150px" /> <br>
-			<ul class="gauge_wrap" style="list-style-type: none">
-				<li>
-					<div>
-						<div class="gauge_main2" style="width: 80%;"></div>
-					</div>
-				</li>
-			</ul>
-			<br> <input value="たたかう" type="button" onclick="attack()"
+				style="WIDTH: 75px; HEIGHT: 150px" /> <br> <br> <input
+				value="たたかう" type="button" onclick="attack()"
 				style="WIDTH: 150px; HEIGHT: 150px" />
 
 
 
 			<script type="text/javascript">
-
+				
 			</script>
 		</div>
 	</div>
