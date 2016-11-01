@@ -119,7 +119,6 @@ left: 600px;*/
 	BattleSystem.geteneID(userID,{
 		callback : function(data){
 			eneID=data;
-			alert(data);
 			BattleSystem.getenemy(data, {
 				//1とはステージを表している
 				callback : function(enedata) {
