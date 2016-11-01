@@ -1,0 +1,44 @@
+<html lang="ja">
+  <head>
+  <title>リザルト</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <script type="text/javascript" src="dwr/engine.js"></script>
+    <script type="text/javascript" src="dwr/util.js"></script>
+    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery.serialize.js"></script>
+    <script type="text/javascript" src="dwr/interface/Score.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script type="text/javascript">
+    	var userID = $.cookie("userID");
+    	var rank;
+    	var point;
+		Score.scoreranker({
+	          callback: function(data) {
+	        	  rank = data;
+	          }
+		});
+		Score.rankerpoint({
+	          callback: function(data) {
+	        	  point = data;
+	          }
+		});
+	    setTimeout( function () {
+    	for(var i=0;i<5;i++){
+    		$("#rank").html($("#rank").html()+'<tr><td>'+(i+1)+'位 '+point[i]+'さん '+rank[i]+'点</td></tr>');
+    	}
+	    } , 2000 );
+
+
+    </script>
+  </head>
+  <body>
+    <br>
+    <p>TOP5</p>
+    <table id = "rank">
+    </table>
+	<p class = getch>
+    <a  href="index.html">戻る</a>
+    </p>
+  </body>
+</html>

@@ -116,9 +116,9 @@ left: 600px;*/
 		}
 	});
 
-	BattleSystem.geteneID(userID, {
-		callback : function(data) {
-			$.cookie("eneID", data);
+	BattleSystem.geteneID(userID,{
+		callback : function(data){
+			eneID=data;
 			BattleSystem.getenemy(data, {
 				//1とはステージを表している
 				callback : function(enedata) {
@@ -248,30 +248,29 @@ left: 600px;*/
 		}
 	}
 
-	function attack() {
-		var eneID = $.cookie("eneID");
-		var battledata = {
-			userID : userID,
-			c1 : akt1,
-			c2 : akt2,
-			c3 : akt3,
-			ene : 1
-		}
-		BattleSystem.battle(battledata, {
-			callback : function(data) {
-				mysumAT = data[0];
-				enemyAT = data[1];
-				if (data[2] > 0) {
-					$('#log').val(
-							$('#log').val() + "必殺ダメージ " + mysumAT
-									+ "のダメージを与えた\n");
-					$('#EHP').text(a.toString() + "/" + enemyHP.toString());
-					$('.gauge_main').css('width', (100 * a / enemyHP) + '%');
-				}
-				(function() {
-					turnup();
-				})();
-			},
+	function attack(){
+			var battledata = {userID:userID,c1:akt1,c2:akt2,c3:akt3,ene:eneID}
+		  	BattleSystem.battle(battledata,{
+	          callback: function(data) {
+	        	  mysumAT = data[0];
+	        	  enemyAT = data[1];
+	        	  if(data[2]>0){
+	        		  a -= data[2];
+	        		  $('#log').val($('#log').val() +"必殺ダメージ :"+ data[2] + "のダメージを与えた\n");
+	        		  $('#EHP').text(a.toString() + "/" + enemyHP.toString());
+	  				$('.gauge_main').css('width', (100 * a / enemyHP) + '%');
+	        	  }
+	        	  if(data[3]>0){
+	        		  b += data[3]
+	        		  	$('#log').val($('#log').val() + data[3]+ "回復した\n");
+	        			$('#MHP').text(b.toString() + "/" + mysumHP.toString());
+	        			$('.gauge_main2').css('width', (100 * b / mysumHP) + '%');
+	        	  }
+	        		(function() {
+	    				turnup();
+	    			})();
+	          },
+
 		});
 	}
 </script>
@@ -281,6 +280,7 @@ left: 600px;*/
 
 	<div id="center02">
 		<div class="inner">
+
 
 
 
@@ -319,7 +319,7 @@ left: 600px;*/
 				
 			<div style="position:relative; top:0px; right: 0px;"><textarea id="log" name="log" cols="50" rows="10" readonly></textarea>
 			</div>
-			
+
 			<br> <br> <img id="partymember1" src="" width="160">
 			<img id="partymember2" src="" width="160"> <img
 				id="partymember3" src="" width="160"> <br> <input
@@ -341,7 +341,7 @@ left: 600px;*/
 
 
 			<script type="text/javascript">
-				
+
 			</script>
 		</div>
 	</div>
