@@ -7,7 +7,7 @@
 	position: relative; /* 絶対配置の基準点 */
 	width: 100%; /* 600px以下は幅いっぱいに広げる */
 	max-width: 600px; /* 最大幅の指定 */
-	height: 300px; /* 高さの指定 */
+	height: 800px; /* 高さの指定 */
 	margin: 0 auto; /* ブロック要素の中央揃え */
 	text-align: center; /* インライン要素の中央揃え */
 	background: #fff; /* 背景色 */
@@ -37,7 +37,7 @@
 		};
 		GachaSystem.gachakekka(user, {
 			callback : function(data) {
-				$("#" + 1).attr('src', 'img/character/img_' + data + ".png");
+				$("#" + 1).attr('src', 'img/character/img_' + data + '.jpg');
 			},
 			errorHandler : updateErrorMessage
 		});
@@ -50,11 +50,11 @@
 </head>
 <body>
 	<div id="center02">
-		<div class="inner">
+		<div>
 			<p>
 			<p>
-				<img src="img/other/img_ura.png" width="120" id=1> <br></br> <input
-					value="ガチャ" type="button" onclick="gacha()" />
+				<img src="img/other/img_ura.png" width="600" height="800" id=1>
+				<br></br> <input class = "inner" value="ガチャ" type="button" onclick="gacha()" />
 			</p>
 			<a href="index.html">戻る</a>
 		</div>
