@@ -175,9 +175,11 @@ left: 600px;*/
 				$('#EHP').text(a.toString() + "/" + enemyHP.toString());
 				$('.gauge_main').css('width', (100 * a / enemyHP) + '%');
 				$.cookie("turn", turncount);
+				setTimeout(function() {
+					alert('倒した!');
+					window.location.replace('result.html');
 
-				alert('倒した!');
-				window.location.replace('result.html');
+				}, 100);
 				return;
 			}
 			b -= enemyAT;
