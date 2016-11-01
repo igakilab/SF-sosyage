@@ -60,6 +60,7 @@
 			},
 			errorHandler : updateErrorMessage
 		});
+		$('.gacha').fadeIn(fast);
 	}
 	function updateErrorMessage(message, exception) {
 		$('#error_message').text(message);
@@ -71,12 +72,11 @@
 	<div id="center02">
 		<div class="inner">
 			<p>
-				<img src="img/other/img_ura.png" width="120" id=1
-					style="WIDTH: 200px; HEIGHT: 200px"> <br></br> <input id=gacha
+				<img src="img/other/img_ura.jpg" width="120" id=1
+					style="WIDTH: 360px; HEIGHT: 480px"> <br></br> <input id=gacha
 					value="ガチャを引く" type="button" onclick="gacha()"
-					style="WIDTH: 150px; HEIGHT: 200px" />
+					style="WIDTH: 150px; HEIGHT: 150px" />
 			</p>
-			<br></br>
 			<p>
 				あと<span id="gachacount"></span>回引けます
 			<p />
