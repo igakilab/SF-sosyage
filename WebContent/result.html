@@ -1,15 +1,15 @@
 <html lang="ja">
-  <head>
-  <title>リザルト</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<head>
+<title>リザルト</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <script type="text/javascript" src="dwr/engine.js"></script>
-    <script type="text/javascript" src="dwr/util.js"></script>
-    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript" src="js/jquery.serialize.js"></script>
-    <script type="text/javascript" src="dwr/interface/Score.js"></script>
-    <script type="text/javascript" src="js/jquery.cookie.js"></script>
-    <script type="text/javascript">
+<script type="text/javascript" src="dwr/engine.js"></script>
+<script type="text/javascript" src="dwr/util.js"></script>
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="js/jquery.serialize.js"></script>
+<script type="text/javascript" src="dwr/interface/Score.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script type="text/javascript">
     	var turn = $.cookie("turn");
     	var userID = $.cookie("userID");
     	var score = 0;
@@ -17,20 +17,21 @@
           callback: function(data) {
         	  $("div").text("今回のバトルのスコアは「"+data[0]+"」です。");
         	  $('#ticket').text(data[0]);
-
         	  if(data[1]>5){
-        		  $('.getch').html('<b>すべての戦闘が終了しました</b><br></br><a class = getch  href="rank.html">最終スコア確認へ進む</a>');
-        	  }
+				  $('#ticket').text(data[0]);
+        		  $('.getch').html('<b>すべての戦闘が終了しました</b><br>あなたの最終スコア:'+data[2]+'<br><br><a class = getch  href="rank.html">最終スコア確認へ進む</a>');
+			  }
           },
         });
     </script>
-  </head>
-  <body>
-    <p>
-    <div></div>
-    今回獲得したガチャは<span id= ticket></span>回です
-	<p class = getch>
-    <a  href="index.html">戻る</a>
-    </p>
-  </body>
+</head>
+<body>
+	<p>
+	<div></div>
+	今回獲得したガチャは
+	<span id=ticket></span>回です
+	<p class=getch>
+		<a href="index.html">戻る</a>
+	</p>
+</body>
 </html>
