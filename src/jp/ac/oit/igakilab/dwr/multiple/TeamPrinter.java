@@ -83,4 +83,15 @@ public class TeamPrinter {
 	        }
 	        return list;
 	}
+	public String geteneID(int userID){
+		DBController reader = new DBController();
+		return reader.doget("SELECT nextenemy FROM user WHERE userID ="+ userID)[0];
+	}
+
+	public String enemyelm(int userID){
+		String eneID =geteneID(userID);
+		DBController reader = new DBController();
+		String enement[] = reader.doget("SELECT elm FROM sfenechara WHERE eneID = " + eneID );
+		return enement[0];
+	}
 }

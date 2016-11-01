@@ -16,10 +16,10 @@
     	Score.scorecount(turn,userID,{
           callback: function(data) {
         	  $("div").text("今回のバトルのスコアは「"+data[0]+"」です。");
-        	  $('#ticket').text(data[0]);
-        	  if(data[1]>5){
-				  $('#ticket').text(data[0]);
-        		  $('.getch').html('<b>すべての戦闘が終了しました</b><br>あなたの最終スコア:'+data[2]+'<br><br><a class = getch  href="rank.html">最終スコア確認へ進む</a>');
+        	  $('#ticket').text(data[1]);
+        	  if(data[2]>5){
+				  $('#ticket').text(data[1]);
+        		  $('.getch').html('<b>すべての戦闘が終了しました</b><br>あなたの最終スコア:'+data[3]+'<br><br><a class = getch  href="rank.html">最終スコア確認へ進む</a>');
 			  }
           },
         });
