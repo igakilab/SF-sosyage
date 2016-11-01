@@ -17,13 +17,31 @@
           },
         });
 
+    	for(var i=0;i<5;i++){
+    		Score.scoreranker(,{
+    	          callback: function(data) {
+    	        	  ("#charabox").html($("#charabox").html()+'<td><img src="" width="120" id ='+id+' onclick="Click('+id+')">');
+    	          },
+    	        });
+    	}
+
 
     </script>
   </head>
   <body>
     <p>
     <div></div>
-    <table id= "rank">
+    <table>
+    <tr id ="rank1">
+    </tr>
+    <tr id ="rank2">
+    </tr>
+    <tr id ="rank3">
+    </tr>
+    <tr id ="rank4">
+    </tr>
+    <tr id ="rank5">
+    </tr>
 
     </table>
 	<p class = getch>
