@@ -160,11 +160,19 @@
 			}
 		}
     );}
+    TeamPrinter.enemyelm(userID,{
+    	callback;function(element){
+    		if(element = "1"){
+    		$("#elm").text("次の敵の属性:Ｏ");
+    		}
+    	}
+    });
     setTimeout( function () {
     	fetchslot();
     	characterfetch();
     } , 1000 );
     </script>
+    <p id = "elm"></p>
 	<br></br>
 	<a href="battle.html">戦闘へ進む</a>
 	<br></br>

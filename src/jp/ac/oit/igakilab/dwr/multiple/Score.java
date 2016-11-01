@@ -8,14 +8,30 @@ public class Score {
 		DBController reader = new DBController();
 		List<String> list = new ArrayList<>();
 		int score;
-		score = turn;
-		String[] result = reader.doget("SELECT score FROM user WHERE userID = " + userID );
+		String[] result = reader.doget("SELECT nextenemy FROM user WHERE userID = " + userID );
+		int x = Integer.valueOf(result[0])+1;
+		//スコアに対するレア度でのボーナス用変数
+		int rare=0;
+		//スコアに対するターン数でのボーナス用変数
+		int tb=5;
+		int gacha =0;
+		if(turn<5){
+			tb -= turn;
+		}else{
+			tb=1;
+		}
+		String[] slot = reader.doget("SELECT slot1,slot2,slot3 FROM user WHERE userID = " + userID );
+		for(int i=0;i<3;i++){
+			rare = rare + Integer.valueOf(reader.doget("SELECT rareid FROM sfchara WHERE charaID = "+ slot[i])[0]);
+		}
+		score = x*rare*tb;
+		result = reader.doget("SELECT score FROM user WHERE userID = " + userID );
 		reader.dowrite("UPDATE user SET score = " +(Integer.valueOf(result[0])+ score) +" WHERE userID = "+userID);
 		list.add(String.valueOf(score));
 		result = reader.doget("SELECT gachacount FROM user WHERE userID = " + userID );
-		reader.dowrite("UPDATE user SET gachacount = " + (Integer.valueOf(result[0])+score) +" WHERE userID = "+userID);
-		result = reader.doget("SELECT nextenemy FROM user WHERE userID = " + userID );
-		int x = Integer.valueOf(result[0])+1;
+		gacha = score /10;
+		list.add(String.valueOf(gacha));
+		reader.dowrite("UPDATE user SET gachacount = " + (Integer.valueOf(result[0])+gacha) +" WHERE userID = "+userID);
 		list.add(String.valueOf(x));
 		if(x>5){
 			list.add(reader.doget("SELECT score FROM user WHERE userID = " + userID )[0]);
