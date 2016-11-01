@@ -159,6 +159,7 @@ public class BattleSystem {
 
 	public String geteneID(int userID){
 		DBController reader = new DBController();
-		return reader.doget("SELECT nextenemy FROM user WHERE "+ userID )[0];
+		return reader.doget("SELECT nextenemy FROM user WHERE userID ="+ userID)[0];
 	}
+
 }
