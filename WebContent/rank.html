@@ -11,38 +11,31 @@
     <script type="text/javascript" src="js/jquery.cookie.js"></script>
     <script type="text/javascript">
     	var userID = $.cookie("userID");
-    	Score.finalscore(userID,{
-          callback: function(data) {
-        	  $("div").text("今回の最終スコアは「"+data[0]+"」です。");
-          },
-        });
-
+    	var rank;
+    	var point;
+		Score.scoreranker({
+	          callback: function(data) {
+	        	  rank = data;
+	          }
+		});
+		Score.rankerpoint({
+	          callback: function(data) {
+	        	  point = data;
+	          }
+		});
+	    setTimeout( function () {
     	for(var i=0;i<5;i++){
-    		Score.scoreranker(,{
-    	          callback: function(data) {
-    	        	  ("#charabox").html($("#charabox").html()+'<td><img src="" width="120" id ='+id+' onclick="Click('+id+')">');
-    	          },
-    	        });
+    		$("#rank").html($("#rank").html()+'<tr><td>'+(i+1)+'位 '+point[i]+'さん '+rank[i]+'点</td></tr>');
     	}
+	    } , 2000 );
 
 
     </script>
   </head>
   <body>
-    <p>
-    <div></div>
-    <table>
-    <tr id ="rank1">
-    </tr>
-    <tr id ="rank2">
-    </tr>
-    <tr id ="rank3">
-    </tr>
-    <tr id ="rank4">
-    </tr>
-    <tr id ="rank5">
-    </tr>
-
+    <br>
+    <p>TOP5</p>
+    <table id = "rank">
     </table>
 	<p class = getch>
     <a  href="index.html">戻る</a>
