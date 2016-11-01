@@ -10,25 +10,22 @@
     <script type="text/javascript" src="dwr/interface/Score.js"></script>
     <script type="text/javascript" src="js/jquery.cookie.js"></script>
     <script type="text/javascript">
-    	var turn = $.cookie("turn");
     	var userID = $.cookie("userID");
-    	var score = 0;
-    	Score.scorecount(turn,userID,{
+    	Score.finalscore(userID,{
           callback: function(data) {
-        	  $("div").text("今回のバトルのスコアは「"+data[0]+"」です。");
-        	  $('#ticket').text(data[0]);
-
-        	  if(data[1]>5){
-        		  $('.getch').html('<b>すべての戦闘が終了しました</b><br></br><a class = getch  href="rank.html">最終スコア確認へ進む</a>');
-        	  }
+        	  $("div").text("今回の最終スコアは「"+data[0]+"」です。");
           },
         });
+
+
     </script>
   </head>
   <body>
     <p>
     <div></div>
-    今回獲得したガチャは<span id= ticket></span>回です
+    <table id= "rank">
+
+    </table>
 	<p class = getch>
     <a  href="index.html">戻る</a>
     </p>
