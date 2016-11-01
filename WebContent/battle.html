@@ -73,6 +73,13 @@
 textarea {
 	resize: none;
 }
+sansukumi{
+/*position: absolute;
+top: 200px;
+left: 600px;*/
+}
+
+
 </style>
 <script type="text/javascript" src="dwr/engine.js"></script>
 <script type="text/javascript" src="dwr/util.js"></script>
@@ -296,11 +303,23 @@ textarea {
 				</li>
 			</ul>
 
-			<I><FONT size="6">turn</FONT></I> <FONT size="7"><font
-				face="Arial Black"><span id="turn"></span></font></FONT> <img id="enemyimg"
-				src="">
+<div style="position:relative; top:-10px; right: 140px;"><img id="enemyimg"src="" align="right"></div>
 
-			<textarea id="log" name="log" cols="50" rows="10" readonly></textarea>
+<div style="position:relative; top:0px; right: 40px;">
+			<I><FONT size="6">turn</FONT></I> <FONT size="7"><font
+				face="Arial Black"><span id="turn"></span></font></FONT> </div>
+				
+				
+				
+				
+		<div style="background"> <div style="position:relative; top:80px; right: 0px;">
+					<img src="img/other/s_kazutonoe.png" width="100" height="100"align="left">
+				</div></div>
+				
+				
+			<div style="position:relative; top:0px; right: 0px;"><textarea id="log" name="log" cols="50" rows="10" readonly></textarea>
+			</div>
+			
 			<br> <br> <img id="partymember1" src="" width="160">
 			<img id="partymember2" src="" width="160"> <img
 				id="partymember3" src="" width="160"> <br> <input
@@ -322,7 +341,7 @@ textarea {
 
 
 			<script type="text/javascript">
-
+				
 			</script>
 		</div>
 	</div>
