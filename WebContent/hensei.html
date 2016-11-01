@@ -107,6 +107,7 @@
     var charaname;
     var atk;
     var hp;
+    var ele;
     TeamPrinter.charaname({
     	callback:function(name){
     		charaname = name;
@@ -127,6 +128,13 @@
     		hp = hitpoint;
     	}
     });
+
+    TeamPrinter.enemyelm(userID,{
+    	callback:function(element){
+    		ele = element;
+    	}
+    });
+
     function fetchslot(){
     TeamPrinter.fetchslot(user, {
         callback: function(data) {
@@ -160,19 +168,21 @@
 			}
 		}
     );}
-    /*TeamPrinter.enemyelm(userID,{
-    	callback;function(element){
-    		if(element = "1"){
-    		$("#elm").text("次の敵の属性:Ｏ");
-    		}
-    	}
-    });*/
-    setTimeout( function () {
-    	fetchslot();
-    	characterfetch();
-    } , 2000 );
-    </script>
-    <p id = "elm"></p>
+
+		setTimeout(function() {
+			fetchslot();
+			characterfetch();
+			if (ele = "1") {
+				$("#elm").append("<font color=\"#ff0000\"><b>Ｏ</b></font>");
+			} else if (ele = "2") {
+				$("#elm").append("<font color=\"#00ff00\">I</font>");
+			}else {
+				$("#elm").append("<font color=\"#0000ff\"><b>T</b></font>");
+			}
+		}, 3000);
+	</script>
+    <br></br>
+    <p id = "elm">次の敵の属性:</p>
 	<br></br>
 	<a href="battle.html">戦闘へ進む</a>
 	<br></br>

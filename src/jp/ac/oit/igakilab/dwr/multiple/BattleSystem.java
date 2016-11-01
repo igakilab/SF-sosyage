@@ -161,4 +161,5 @@ public class BattleSystem {
 		DBController reader = new DBController();
 		return reader.doget("SELECT nextenemy FROM user WHERE userID ="+ userID)[0];
 	}
+
 }
