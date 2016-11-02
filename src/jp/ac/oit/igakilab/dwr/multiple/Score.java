@@ -13,9 +13,9 @@ public class Score {
 		//スコアに対するレア度でのボーナス用変数
 		int rare=0;
 		//スコアに対するターン数でのボーナス用変数
-		int tb=5;
+		int tb=10;
 		int gacha =0;
-		if(turn<5){
+		if(turn<10){
 			tb -= turn;
 		}else{
 			tb=1;
@@ -29,7 +29,7 @@ public class Score {
 		reader.dowrite("UPDATE user SET score = " +(Integer.valueOf(result[0])+ score) +" WHERE userID = "+userID);
 		list.add(String.valueOf(score));
 		result = reader.doget("SELECT gachacount FROM user WHERE userID = " + userID );
-		gacha = score /10;
+		gacha = score /15;
 		list.add(String.valueOf(gacha));
 		reader.dowrite("UPDATE user SET gachacount = " + (Integer.valueOf(result[0])+gacha) +" WHERE userID = "+userID);
 		list.add(String.valueOf(x));
