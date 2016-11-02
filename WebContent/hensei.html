@@ -145,7 +145,7 @@
 
         	for(var i = 0;i<data.length;++i){
         		var x = data[i]-1;
-				$("#slotbox").html($("#slotbox").html()+'<td><p><img src="" width="120" id ='+data[i]+' onclick="Click('+data[i]+')"></p><p>'+charaname[x]+'</p><p>攻撃力 '+atk[x]+'</p><p>HP '+hp[x]+'</p></td>');
+				$("#slotbox").html($("#slotbox").html()+'<td><p><img src="" width="150" id ='+data[i]+' onclick="Click('+data[i]+')"></p><p>'+charaname[x]+'</p><p>攻撃力 '+atk[x]+'</p><p>HP '+hp[x]+'</p></td>');
 				$('#' + data[i]).attr('src', 'img/character/img_'+data[i]+'.jpg');
 				}
         	}
@@ -161,7 +161,7 @@
 			for(var i = 0;i<data2.length;++i){
 				var id=i+1;
 				if(data2[i]>0&&id!=slotdata[0]&&id!=slotdata[1]&&id!=slotdata[2]){
-				$("#charabox").html($("#charabox").html()+'<td><p><img src="" width="120" id ='+id+' onclick="Click('+id+')"></p><p>'+charaname[i]+'</p><p>攻撃力 '+atk[i]+'</p><p>HP '+hp[i]+'</p></td>');
+				$("#charabox").html($("#charabox").html()+'<td><p><img src="" width="150" id ='+id+' onclick="Click('+id+')"></p><p>'+charaname[i]+'</p><p>攻撃力 '+atk[i]+'</p><p>HP '+hp[i]+'</p></td>');
 				$('#' + id).attr('src', 'img/character/img_'+id+'.jpg');
 					}
 				}
@@ -173,20 +173,18 @@
 			fetchslot();
 			characterfetch();
 			if (ele == "1") {
-				$("#elm").append("<font size=\"4\" color=\"#ff0000\"><b>Ｏ</b></font>");
+				$("#elm").append("<font size=\"7\" color=\"#ff0000\"><b> Ｏ </b></font>");
 			} else if (ele == "2") {
-				$("#elm").append("<font size=\"4\" color=\"#00ff00\">I</font>");
+				$("#elm").append("<font size=\"7\" color=\"#00ff00\"> Ｉ </font>");
 			}else {
-				$("#elm").append("<font size=\"4\" color=\"#0000ff\"><b>T</b></font>");
+				$("#elm").append("<font size=\"7\" color=\"#0000ff\"><b> Ｔ </b></font>");
 			}
 		}, 3000);
 	</script>
     <br></br>
-    <p id = "elm">次の敵の属性:</p>
+    <img src="img/other/sansukumikai.png" width="100" height="100"align="left">
+    <p id = "elm">　　　次の敵の属性:</p>
 	<br></br>
-	<div style="position: relative; top: 80px; right: 0px;">
-		<img src="img/other/sansukumikai.png" width="100" height="100"align="left">
-	</div>
 	<br></br>
 	<a href="battle.html">戦闘へ進む</a>
 	<br></br>

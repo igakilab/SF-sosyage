@@ -2,7 +2,25 @@
 <head>
 <title>リザルト</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+#center02 {
+	position: relative; /* 絶対配置の基準点 */
+	width: 100%; /* 600px以下は幅いっぱいに広げる */
+	max-width: 600px; /* 最大幅の指定 */
+	height: 300px; /* 高さの指定 */
+	margin: 0 auto; /* ブロック要素の中央揃え */
+	text-align: center; /* インライン要素の中央揃え */
+	background: #fff; /* 背景色 */
+}
 
+#center02 .inner {
+	position: absolute; /* 絶対配置 */
+	top: 0%; /* 上から半分 */
+	left: 50%; /* 左から半分 */
+	width: 100%; /* 大枠と同じ幅に */
+	margin: -1.5em 0 0 -50%; /* 要素の大きさの半分引く */
+}
+</style>
 <script type="text/javascript" src="dwr/engine.js"></script>
 <script type="text/javascript" src="dwr/util.js"></script>
 <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
@@ -15,7 +33,7 @@
     	var score = 0;
     	Score.scorecount(turn,userID,{
           callback: function(data) {
-        	  $("div").text("今回のバトルのスコアは「"+data[0]+"」です。");
+        	  $("#score").text("今回のバトルのスコアは「"+data[0]+"」です。");
         	  $('#ticket').text(data[1]);
         	  if(data[2]>5){
 				  $('#ticket').text(data[1]);
@@ -26,12 +44,19 @@
     </script>
 </head>
 <body>
-	<p>
-	<div></div>
+	<div id="center02">
+	<div class="inner">
+	<br></br>
+	<font size = "5">
+	<div id = "score"></div>
 	今回獲得したガチャは
 	<span id=ticket></span>回です
+	</font>
 	<p class=getch>
 		<a href="index.html">戻る</a>
 	</p>
+
+			</div>
+	</div>
 </body>
 </html>

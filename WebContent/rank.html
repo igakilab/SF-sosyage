@@ -2,7 +2,29 @@
   <head>
   <title>リザルト</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+#center02 {
+	position: relative; /* 絶対配置の基準点 */
+	width: 100%; /* 600px以下は幅いっぱいに広げる */
+	max-width: 600px; /* 最大幅の指定 */
+	height: 300px; /* 高さの指定 */
+	margin: 0 auto; /* ブロック要素の中央揃え */
+	text-align: center; /* インライン要素の中央揃え */
+	background: #fff; /* 背景色 */
+}
 
+#center02 .inner {
+	position: absolute; /* 絶対配置 */
+	top: 0%; /* 上から半分 */
+	left: 50%; /* 左から半分 */
+	width: 100%; /* 大枠と同じ幅に */
+	margin: -1.5em 0 0 -50%; /* 要素の大きさの半分引く */
+}
+#rank{
+ margin-left: auto;
+ margin-right: auto;
+}
+</style>
     <script type="text/javascript" src="dwr/engine.js"></script>
     <script type="text/javascript" src="dwr/util.js"></script>
     <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
@@ -33,12 +55,16 @@
     </script>
   </head>
   <body>
+  	<div id="center02">
+	<div class="inner">
     <br>
-    <p>TOP5</p>
+    <font size = "7"><p>TOP5</p></font>
     <table id = "rank">
     </table>
 	<p class = getch>
     <a  href="LogIN.html">戻る</a>
     </p>
+    </div>
+	</div>
   </body>
 </html>
