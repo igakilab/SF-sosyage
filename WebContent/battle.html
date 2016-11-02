@@ -78,7 +78,7 @@ sansukumi {
 	/*position: absolute;
 top: 200px;
 left: 600px;*/
-	
+
 }
 </style>
 <link href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css"
@@ -177,18 +177,18 @@ left: 600px;*/
 
 		}
 	});
-	
-	
-	
-	
-	
+
+
+
+
+
 
 	function turnup() {
 		$('#turn').text(turncount.toString());
 		if (turncount != 0) {
 			a -= mysumAT;
 			$('#log').val($('#log').val() + mysumAT + "のダメージを与えた\n");
-			
+
 			if (a <= 0) {
 				$('#EHP').text(a.toString() + "/" + enemyHP.toString());
 				$('.gauge_main').css('width', (100 * a / enemyHP) + '%');
@@ -202,6 +202,17 @@ left: 600px;*/
 			}
 			b -= enemyAT;
 			$('#log').val($('#log').val() + enemyAT + "のダメージを受けた\n");
+			if (b <= 0) {
+				$('#MHP').text(b.toString() + "/" + mysumHP.toString());
+				$('.gauge_main').css('width', (100 * b / mysumHP) + '%');
+				$.cookie("turn", turncount);
+				setTimeout(function() {
+					alert('敗北した・・・');
+					window.location.replace('hensei.html');
+
+				}, 100);
+				return;
+			}
 
 		}
 
@@ -268,7 +279,7 @@ left: 600px;*/
 		}
 	}
 
-	
+
 	function attack() {
 		var battledata = {
 			userID : userID,
@@ -301,7 +312,7 @@ left: 600px;*/
 			},
 
 		});
-		
+
 		$(function() {
 
 			$('#enemyimg').jrumble({
