@@ -29,7 +29,7 @@ public class Score {
 		reader.dowrite("UPDATE user SET score = " +(Integer.valueOf(result[0])+ score) +" WHERE userID = "+userID);
 		list.add(String.valueOf(score));
 		result = reader.doget("SELECT gachacount FROM user WHERE userID = " + userID );
-		gacha = score /20;
+		gacha = score /30;
 		list.add(String.valueOf(gacha));
 		reader.dowrite("UPDATE user SET gachacount = " + (Integer.valueOf(result[0])+gacha) +" WHERE userID = "+userID);
 		list.add(String.valueOf(x));
